@@ -64,7 +64,7 @@
 
 
                                 </p:submenu>
-                                <p:submenu label="Administrar" icon="ui-icon-contact">
+                                <p:submenu label="Administrar" icon="ui-icon-contact" rendered="#{loginFormBean.verificarSesionUsuarioFinal() eq false}">
                                     <p:column>
                                         <p:submenu >
                                             <p:menuitem value="Usuarios" outcome="/Administracion/perfilUsuario" />
