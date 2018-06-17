@@ -14,9 +14,9 @@
             <ui:define name="content">
                 <div id="tooplate_main">
                     <div>
-                        <h:form id="ListaDirector">
-            <p:panel header="Director" footer="Sistema de Cine - 2018" style="width:800px;">
-                <p:dataTable id="listDirector">
+                        <h:form id="ListaActor">
+            <p:panel header="Actor" footer="Sistema de Cine - 2018" style="width:800px;">
+                <p:dataTable id="listActor">
                     <p:column headerText="Apellido">
                         <p:outputLabel value=""/>   
                     </p:column>
@@ -26,17 +26,17 @@
                     </p:column>
 
                 </p:dataTable>
-                <p:commandButton value="Cargar Director" oncomplete="PF('cargarDirector').show()"/>
+                <p:commandButton value="Cargar Actor" oncomplete="PF('cargarActor').show()"/>
             </p:panel>
         </h:form>
 
 
 
         <h:form>
-            <p:dialog widgetVar="cargarDirector" modal="true">
+            <p:dialog widgetVar="cargarActor" modal="true">
 
 
-                <p:panel header="Alta Director" footer="Sistema de Cine - 2018" style="width:600px;">
+                <p:panel header="Alta Actor" footer="Sistema de Cine - 2018" style="width:600px;">
                     <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid"
                                  style="border:none;margin:0 auto;width:500px;">
 
@@ -47,8 +47,8 @@
                         <p:inputText id="txtNombreDir"  required="true"/>
 
                         <h:panelGroup/>
-                        <p:commandButton id="btnGuardarDir" value="Agregar Director" update=""
-                                         oncomplete="PF('cargarDirector').hide()"/>
+                        <p:commandButton id="btnGuardarDir" value="Agregar Actor" update=""
+                                         oncomplete="PF('cargarActor').hide()"/>
                     </h:panelGrid>
                 </p:panel>
             </p:dialog>
