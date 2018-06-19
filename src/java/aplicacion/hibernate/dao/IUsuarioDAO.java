@@ -13,10 +13,12 @@ public interface IUsuarioDAO {
      */
     Usuario validarUsuario(String nombreUsuario, String password);
 
-    void modificar(Usuario unUsuario);
-
     Usuario obtenerUsuario(String nombreUsuario);
-    
-    void agregar(Usuario usuario);
-    
+
+    public void agregar(Usuario usuario);
+
+    public void editar(Usuario usuario);
+
+    public void eliminar(Usuario usuario);
+
 }

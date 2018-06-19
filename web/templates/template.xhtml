@@ -17,17 +17,15 @@
         <div id="contenedor">
             <div class="top">
                 <ui:insert name="top">
-                    <div id="tooplate_header">
+                    <div id="tooplate_header" style="text-align: center">
                         <div id="titulo">
-                            <center><h1>CINE UNJU</h1></center>
+                            <p:outputLabel value="CINE UNJU"/>
                         </div> 
                     </div>
 
                     <div id="tooplate_middle"  >
-                        <h:form rendered="#{loginFormBean.verificarSesion()}">
+                        <h:form rendered="#{usuarioControlFormBean.verificarSesion()}">
                             <p:menubar>
-                                <p:menuitem value="Alta Usuario" icon="ui-icon-pencil" outcome="/usuarios/altaUsuario"/>
-
                                 <p:submenu label="Salas" icon="ui-icon-document">
                                     <p:submenu label="Sala.1">
                                         <p:menuitem value="3D" url="#" />
@@ -53,20 +51,14 @@
                                     </p:submenu>
                                 </p:submenu>
 
-                                <p:submenu label="Administrar" icon="ui-icon-contact" rendered="#{loginFormBean.verificarSesionUsuarioFinal() eq false}">
+                                <p:submenu label="Administrar" icon="ui-icon-contact" rendered="#{usuarioControlFormBean.verificarSesionUF() eq false}">
 
                                     <p:submenu label="Usuarios" >
-                                        <p:menuitem value="Alta Usuario"
+                                        <p:menuitem value="ABM Usuario"
                                                     outcome="/Administracion/perfilUsuario">
                                         </p:menuitem>
-                                        <p:menuitem value="Baja Usuario"
-                                            > 
-                                        </p:menuitem>
-                                        <p:menuitem value="Modificacion Usuario"
-                                            >
-                                        </p:menuitem>
                                         <p:menuitem value="Reportes"
-                                            >
+                                                    >
                                         </p:menuitem>
                                     </p:submenu>
                                     <p:submenu label="Peliculas" >
@@ -74,41 +66,38 @@
                                                     outcome="/Administracion/altaPelicula">
                                         </p:menuitem>
                                         <p:menuitem value="Baja Pelicula"
-                                            > 
+                                                    > 
                                         </p:menuitem>
-                                        <p:menuitem value="Modificacion Pelicula"
-                                            >
+                                        <p:menuitem value="Modificacion Pelicula">
                                         </p:menuitem>
-                                        <p:menuitem value="Reportes"
-                                            >
+                                        <p:menuitem value="Reportes">
                                         </p:menuitem>
                                     </p:submenu>
                                     <p:submenu label="Directores" >
                                         <p:menuitem value="Alta Director"
                                                     outcome="/Administracion/altaDirector">
                                         </p:menuitem>
-                                        <p:menuitem value="Baja Director"
-                                            > 
+                                        <p:menuitem value="Baja Director"> 
                                         </p:menuitem>
                                         <p:menuitem value="Modificacion Director"
-                                            >
+                                                    >
                                         </p:menuitem>
                                         <p:menuitem value="Reportes"
-                                            >
+                                                    >
                                         </p:menuitem>
                                     </p:submenu>
                                     <p:submenu label="Actores" >
                                         <p:menuitem value="Alta Actor"
-                                                   outcome="/Administracion/altaActor" >
+                                                    outcome="/Administracion/altaActor" >
                                         </p:menuitem>
                                         <p:menuitem value="Baja Actor"
-                                            > 
+                                                    > 
                                         </p:menuitem>
                                         <p:menuitem value="Modificacion Actor"
-                                            >
+                                                    >
                                         </p:menuitem>
                                         <p:menuitem value="Reportes"
-                                            >
+                                                    >
                                         </p:menuitem>
                                     </p:submenu>
                                     <p:submenu label="Clasificaciones" >
@@ -116,29 +105,25 @@
                                                     outcome="/Administracion/altaClasificacion">
                                         </p:menuitem>
                                         <p:menuitem value="Baja Clasificacion"
-                                            > 
+                                                    > 
                                         </p:menuitem>
                                         <p:menuitem value="Modificacion Clasificacion"
-                                            >
+                                                    >
                                         </p:menuitem>
                                         <p:menuitem value="Reportes"
-                                            >
+                                                    >
                                         </p:menuitem>
                                     </p:submenu>
                                 </p:submenu>
-                                
+
                                 <p:menuitem value="Volver" outcome="/menu"/>
                                 <f:facet name="options">
-                                    <p:outputLabel value="Bienvenido #{loginFormBean.nombreUsuarioValidado} "/>
-                                    <p:commandButton value="Cerrar Sesion" action="#{loginFormBean.cerrarSesion()}"/>
+                                    <p:outputLabel value="Bienvenido #{usuarioControlFormBean.mostrarNombreUsuario()} "/>
+                                    <p:commandButton value="Cerrar Sesion" action="#{usuarioControlFormBean.cerrarSesion()}"/>
                                 </f:facet>
-
-
-
-
                             </p:menubar>
                         </h:form>
-                        <p:panel rendered="#{loginFormBean.verificarSesion() eq false}">
+                        <p:panel rendered="#{usuarioControlFormBean.verificarSesion() eq false}">
                             <h:form>
                                 <p:outputLabel value="Sesion no iniciada"/>
                                 <p:commandButton value="Iniciar Sesion" action="/index?faces-redirect=true"/>
@@ -149,22 +134,17 @@
             </div>
             <div id="content" class="center_content"  >
                 <ui:insert name="content" >
-                    Content
+                    
                 </ui:insert>
             </div>
 
             <div id="tooplate_footer">
-
-                <div class="bottom">
+                <div class="bottom" style="text-align: center">
                     <ui:insert name="bottom">
                         <hr/>
-                        <center>
-                            Desarrollado por Catedra Programacion Visual - Universidad Nacional de Jujuy
-                        </center>
-
+                        <p:outputLabel value="Desarrollado por Catedra Programacion Visual - Universidad Nacional de Jujuy"/>
                     </ui:insert>
                 </div>
-
             </div>
         </div>
     </h:body>

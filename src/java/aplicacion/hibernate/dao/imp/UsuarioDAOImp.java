@@ -24,15 +24,6 @@ public class UsuarioDAOImp implements IUsuarioDAO {
     }
 
     @Override
-    public void modificar(Usuario unUsuario) {
-        Session session = HibernateUtil.getSESSION_FACTORY().openSession();
-        session.beginTransaction();
-        session.update(unUsuario);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    @Override
     public Usuario obtenerUsuario(String nombreUsuario) {
         Usuario usuario = null;
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
@@ -49,6 +40,24 @@ public class UsuarioDAOImp implements IUsuarioDAO {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
         session.save(usuario);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    @Override
+    public void editar(Usuario usuario) {
+        Session session = HibernateUtil.getSESSION_FACTORY().openSession();
+        session.beginTransaction();
+        session.update(usuario);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public void eliminar(Usuario usuario) {
+        Session session = HibernateUtil.getSESSION_FACTORY().openSession();
+        session.beginTransaction();
+        session.update(usuario);
         session.getTransaction().commit();
         session.close();
     }
