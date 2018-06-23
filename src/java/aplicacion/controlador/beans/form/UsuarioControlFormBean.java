@@ -9,14 +9,14 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @ViewScoped
-public class UsuarioControlFormBean implements Serializable{
+public class UsuarioControlFormBean implements Serializable {
 
     public UsuarioControlFormBean() {
     }
 
     public String mostrarNombreUsuario() {
         Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
-        return usuario.getNombreUsuario();
+        return "[ " + usuario.getNombreUsuario() + " ]  ";
     }
 
     public boolean verificarSesion() {

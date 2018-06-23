@@ -24,7 +24,7 @@ public class LoginFormBean {
         Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario, password);
         if (usuario != null) {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioValidado", usuario);
-            resultado = "menu?faces-redirect=true";
+            resultado = "/menu/menu?faces-redirect=true";
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", "Bienvenido");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
         } else {

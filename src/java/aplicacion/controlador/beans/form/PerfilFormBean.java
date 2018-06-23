@@ -51,7 +51,28 @@ public class PerfilFormBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, facesmessage);
         }
     }
-
+    
+    public void agregarPerfilInicial(Perfil perfil) {
+        try {
+            usuarioBean.getUsuario().setCodigo(0);
+            usuarioBean.getUsuario().setEstado(true);
+            usuarioBean.getUsuario().setTipoUsuario("FINAL");
+            IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
+            usuarioDAO.agregar(usuarioBean.getUsuario());
+            perfilBean.getPerfil().setCodigo(0);
+            perfilBean.getPerfil().setEstado(true);
+            perfilBean.getPerfil().setUsuario(usuarioBean.getUsuario());
+            IPerfilDAO perfilDAO = new PerfilDAOImp();
+            perfilDAO.agregar(perfilBean.getPerfil());
+            FacesMessage facesmessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta creada con exito!", "Cuenta creada con exito!");
+            FacesContext.getCurrentInstance().addMessage(null, facesmessage);
+            RequestContext.getCurrentInstance().execute("PF('crearCuenta').hide()");
+        } catch (Exception e) {
+            FacesMessage facesmessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear la cuenta", "Error al crear la cuenta");
+            FacesContext.getCurrentInstance().addMessage(null, facesmessage);
+        }
+    }
+    
     public void editarPerfil(Perfil perfil) {
         try {
             IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
@@ -96,7 +117,15 @@ public class PerfilFormBean implements Serializable {
 
     public void limpiarCampos() {
         usuarioBean.setUsuario(new Usuario());
+        usuarioBean.getUsuario().setNombreUsuario("");
+        usuarioBean.getUsuario().setPassword("");
         perfilBean.setPerfil(new Perfil());
+        perfilBean.getPerfil().setApellido("");
+        perfilBean.getPerfil().setNombre("");
+        perfilBean.getPerfil().setDni("");
+        perfilBean.getPerfil().setDireccion("");
+        perfilBean.getPerfil().setEmail("");
+        perfilBean.getPerfil().setFechaNac(null);
     }
     
     public Date getFechaActual() {

@@ -10,10 +10,6 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import org.primefaces.validate.ClientValidator;
 
-/**
- *
- * @author win7
- */
 @FacesValidator("emailValidator")
 public class EmailValidator implements Validator, ClientValidator {
 
