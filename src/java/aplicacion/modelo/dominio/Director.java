@@ -4,75 +4,75 @@ import java.io.Serializable;
 
 public class Director implements Serializable {
 
-    private Integer dirCodigo;
-    private String dirApellidos;
-    private String dirNombres;
-    private boolean dirEstado;
+    private Integer codigo;
+    private String apellido;
+    private String nombre;
+    private boolean estado;
 
     public Director() {
     }
 
     public Director(Integer dirCodigo, String dirApellidos, String dirNombres, boolean dirEstado) {
-        this.dirCodigo = dirCodigo;
-        this.dirApellidos = dirApellidos;
-        this.dirNombres = dirNombres;
-        this.dirEstado = dirEstado;
+        this.codigo = dirCodigo;
+        this.apellido = dirApellidos;
+        this.nombre = dirNombres;
+        this.estado = dirEstado;
     }
 
     /**
-     * @return the dirCodigo
+     * @return the codigo
      */
-    public Integer getDirCodigo() {
-        return dirCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param dirCodigo the dirCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setDirCodigo(Integer dirCodigo) {
-        this.dirCodigo = dirCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the dirApellidos
+     * @return the apellido
      */
-    public String getDirApellidos() {
-        return dirApellidos;
+    public String getApellido() {
+        return apellido;
     }
 
     /**
-     * @param dirApellidos the dirApellidos to set
+     * @param apellido the apellido to set
      */
-    public void setDirApellidos(String dirApellidos) {
-        this.dirApellidos = dirApellidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     /**
-     * @return the dirNombres
+     * @return the nombre
      */
-    public String getDirNombres() {
-        return dirNombres;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
-     * @param dirNombres the dirNombres to set
+     * @param nombre the nombre to set
      */
-    public void setDirNombres(String dirNombres) {
-        this.dirNombres = dirNombres;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
-     * @return the dirEstado
+     * @return the estado
      */
-    public boolean isDirEstado() {
-        return dirEstado;
+    public boolean isEstado() {
+        return estado;
     }
 
     /**
-     * @param dirEstado the dirEstado to set
+     * @param estado the estado to set
      */
-    public void setDirEstado(boolean dirEstado) {
-        this.dirEstado = dirEstado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
 }

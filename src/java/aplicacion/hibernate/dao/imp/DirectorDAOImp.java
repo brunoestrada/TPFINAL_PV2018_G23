@@ -1,51 +1,51 @@
 package aplicacion.hibernate.dao.imp;
 
 import aplicacion.datos.hibernate.configuracion.HibernateUtil;
-import aplicacion.hibernate.dao.IPerfilDAO;
-import aplicacion.modelo.dominio.Perfil;
+import aplicacion.modelo.dominio.Director;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import aplicacion.hibernate.dao.IDirectorDAO;
 
-public class PerfilDAOImp implements IPerfilDAO {
+public class DirectorDAOImp implements IDirectorDAO {
 
     @Override
-    public void agregar(Perfil perfil) {
+    public void agregar(Director director) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.save(perfil);
+        session.save(director);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void editar(Perfil perfil) {
+    public void editar(Director director) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.update(perfil);
+        session.update(director);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void eliminar(Perfil perfil) {
+    public void eliminar(Director director) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.update(perfil);
+        session.update(director);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<Perfil> obtenerPerfiles() {
+    public List<Director> obtenerDirectores() {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
-        Criteria criteria = session.createCriteria(Perfil.class);
+        Criteria criteria = session.createCriteria(Director.class);
         criteria.add(Restrictions.eq("estado", true));
-        criteria.addOrder(Order.asc("usuario"));
-        List perfiles = criteria.list();
-        return perfiles;
+        criteria.addOrder(Order.asc("nombre"));
+        List directores = criteria.list();
+        return directores;
     }
 
 }

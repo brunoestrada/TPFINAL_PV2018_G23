@@ -14,13 +14,13 @@
             <ui:define name="content">
                 <div id="tooplate_main">
                     <br/>
-                    <p:outputLabel id="txtInicio" value="Inicio"/>
+                    <p:outputLabel id="txtInicio" value="Inicio" rendered="#{usuarioControlFormBean.verificarSesion()}"/>
                     <br/>
-                    <p:outputLabel id="txtParrafo" value="El cine unju fue creado el 01 de Enero de 2018, bajo la aprobación del rectorado de la UNJu y de todas las facultades.
+                    <p:outputLabel id="txtParrafo" rendered="#{usuarioControlFormBean.verificarSesion()}" value="El cine unju fue creado el 01 de Enero de 2018, bajo la aprobación del rectorado de la UNJu y de todas las facultades.
                                    Es un gran orgullo para toda nuestra universidad poder contar con un cine propio de esta categoria, ya que en él se podrán
                                    realizar muchos eventos importantes sin la necesidad de depender de terceros."/>
                     <br/><br/>
-                    <p:panel>
+                    <p:panel id="pnlSlider" rendered="#{usuarioControlFormBean.verificarSesion()}">
                         <div id="sliderFrame">
                             <div id="slider" >
                                 <h:graphicImage value="/resources/slider/img/image-slider-1.jpg" alt="Bienvenido al Cine UNJu."/>

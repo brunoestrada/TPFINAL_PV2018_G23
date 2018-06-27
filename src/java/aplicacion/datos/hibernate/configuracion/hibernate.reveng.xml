@@ -40,10 +40,12 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-reverse-engineering>
-  <schema-selection match-catalog="cine"/>
+    <schema-selection match-catalog="cine"/>
     <table-filter match-name="pel_cla"/>
-  <table-filter match-name="peliculas"/>
-  <table-filter match-name="ventas_entradas"/>
-  <table-filter match-name="usuarios"/>
-  <table-filter match-name="perfiles"/>
+    <table-filter match-name="peliculas"/>
+    <table-filter match-name="ventas_entradas"/>
+    <table-filter match-name="usuarios"/>
+    <table-filter match-name="perfiles"/>
+    <table-filter match-name="clasificaciones"/>
+    <table-filter match-name="directores"/>
 </hibernate-reverse-engineering>

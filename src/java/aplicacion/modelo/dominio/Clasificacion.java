@@ -4,59 +4,59 @@ import java.io.Serializable;
 
 public class Clasificacion implements Serializable {
 
-    private Integer claCodigo;
-    private String claDescripcion;
-    private boolean claEstado;
+    private Integer codigo;
+    private String descripcion;
+    private boolean estado;
 
     public Clasificacion() {
     }
 
     public Clasificacion(Integer claCodigo, String claDescripcion, boolean claEstado) {
-        this.claCodigo = claCodigo;
-        this.claDescripcion = claDescripcion;
-        this.claEstado = claEstado;
+        this.codigo = claCodigo;
+        this.descripcion = claDescripcion;
+        this.estado = claEstado;
     }
 
     /**
-     * @return the claCodigo
+     * @return the codigo
      */
-    public Integer getClaCodigo() {
-        return claCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param claCodigo the claCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setClaCodigo(Integer claCodigo) {
-        this.claCodigo = claCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the claDescripcion
+     * @return the descripcion
      */
-    public String getClaDescripcion() {
-        return claDescripcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
-     * @param claDescripcion the claDescripcion to set
+     * @param descripcion the descripcion to set
      */
-    public void setClaDescripcion(String claDescripcion) {
-        this.claDescripcion = claDescripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     /**
-     * @return the claEstado
+     * @return the estado
      */
-    public boolean isClaEstado() {
-        return claEstado;
+    public boolean isEstado() {
+        return estado;
     }
 
     /**
-     * @param claEstado the claEstado to set
+     * @param estado the estado to set
      */
-    public void setClaEstado(boolean claEstado) {
-        this.claEstado = claEstado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
 }

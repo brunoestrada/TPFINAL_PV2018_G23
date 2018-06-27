@@ -11,45 +11,82 @@
         <ui:composition template="./../templates/template.xhtml">
             <ui:define name="content">
                 <div id="tooplate_main">
-                    <h:form id="ListaDirector">
-                        <p:growl id="growl" showDetail="false" sticky="false"/>
+                    <h:form id="frmDirector" rendered="#{usuarioControlFormBean.verificarSesion()}">
                         <p:panel header="Director" footer="Sistema de Cine - 2018">
-                            <p:dataTable id="listDirector" paginator="true" rows="6">
+                            <p:dataTable id="tblDirector" paginator="true" rows="6" value="#{directorFormBean.cargarDirectores()}" var="dire">
                                 <p:column headerText="Apellido">
-                                    <p:outputLabel value=""/>   
+                                    <p:outputLabel value="#{dire.apellido}"/>   
                                 </p:column>
 
                                 <p:column headerText="Nombre">
-                                    <p:outputLabel value=""/>   
+                                    <p:outputLabel value="#{dire.nombre}"/>   
                                 </p:column>
 
                                 <p:column headerText="Acciones" style="text-align: center">
-                                    <p:commandButton id="btnEditarDirector" icon="ui-icon-pencil" oncomplete="" update=""/>
-                                    <p:commandButton id="btnEliminarDirector" icon="ui-icon-trash" oncomplete="" update=""/>
+                                    <p:commandButton id="btnEditarDirector" icon="ui-icon-pencil" oncomplete="PF('editarDirector').show()"
+                                                     actionListener="#{directorFormBean.establecerDirector(dire)}" update="frmEditarDirector"/>
+                                    <p:commandButton id="btnEliminarDirector" icon="ui-icon-trash" oncomplete="PF('eliminarDirector').show()"
+                                                     actionListener="#{directorFormBean.establecerDirector(dire)}" update="frmEliminarDirector"/>
                                 </p:column>
                             </p:dataTable>
                             <br/>
-                            <p:commandButton value="Cargar Director" oncomplete="PF('cargarDirector').show()"/>
+                            <p:commandButton id="btnAgregarDirector" value="Agregar Director" oncomplete="PF('cargarDirector').show()"
+                                             actionListener="#{directorFormBean.limpiarCampos()}" update="frmCargaDirector"/>
                         </p:panel>
                     </h:form>
-                    <h:form>
+                    <h:form id="frmCargaDirector">
+                        <p:growl id="grlCargaDirector" showDetail="false" sticky="false"/>
                         <p:dialog header="Alta de Director" widgetVar="cargarDirector" modal="true">
                             <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid" >
                                 <p:outputLabel for="txtApellidoDir" value="Apellido:"/>
-                                <p:inputText id="txtApellidoDir" required="true"/>
+                                <p:inputText id="txtApellidoDir" required="true" requiredMessage="Complete apellido del director"
+                                             value="#{directorFormBean.directorBean.director.apellido}"/>
 
                                 <p:outputLabel for="txtNombreDir" value="Nombre:"/>
-                                <p:inputText id="txtNombreDir"  required="true"/>
+                                <p:inputText id="txtNombreDir" required="true" requiredMessage="Complete nombre del director"
+                                             value="#{directorFormBean.directorBean.director.nombre}"/>
 
-                                <h:panelGroup/>
-                                <p:commandButton id="btnGuardarDir" value="Agregar Director" update=""
-                                                 oncomplete="PF('cargarDirector').hide()"/>
+                                <p:commandButton id="btnGuardarDir" value="Aceptar" actionListener="#{directorFormBean.agregar(directorFormBean.directorBean.director)}"
+                                                 update="grlCargaDirector, :frmDirector:tblDirector"/>
+                                <p:commandButton id="btnCancelGuardarDir" value="Cancelar" oncomplete="PF('cargarDirector').hide()"/>
                             </h:panelGrid>
                         </p:dialog>
+                    </h:form>
+                    <h:form id="frmEditarDirector">
+                        <p:growl id="grlEditarDirector" showDetail="false" sticky="false"/>
+                        <p:dialog header="Editar Director" widgetVar="editarDirector" modal="true">
+                            <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid" >
+                                <p:outputLabel for="txtApellidoDir" value="Apellido:"/>
+                                <p:inputText id="txtApellidoDir" required="true" requiredMessage="Complete apellido del director"
+                                             value="#{directorFormBean.directorBean.director.apellido}"/>
+
+                                <p:outputLabel for="txtNombreDir" value="Nombre:"/>
+                                <p:inputText id="txtNombreDir" required="true" requiredMessage="Complete nombre del director"
+                                             value="#{directorFormBean.directorBean.director.nombre}"/>
+
+                                <p:commandButton id="btnEditarDir" value="Aceptar" actionListener="#{directorFormBean.editar(directorFormBean.directorBean.director)}"
+                                                 update="grlEditarDirector, :frmDirector:tblDirector"/>
+                                <p:commandButton id="btnCancelEditarDir" value="Cancelar" oncomplete="PF('editarDirector').hide()"/>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                    <h:form id="frmEliminarDirector">
+                        <p:growl id="grlEliminarDirector" showDetail="false" sticky="false"/>
+                        <p:confirmDialog widgetVar="eliminarDirector" header="Eliminar Director"
+                                         message="¿Desea eliminar este item?" showEffect="explode" hideEffect="explode">
+                            <h:panelGrid columns="3" cellpadding="5" style="text-align: center">
+                                <p:outputLabel value="Director: "/>
+                                <p:outputLabel value="#{directorFormBean.directorBean.director.nombre}, #{directorFormBean.directorBean.director.apellido}"/>
+                                <h:panelGroup/>
+                                <h:panelGroup/>
+                                <p:commandButton value="SI" actionListener="#{directorFormBean.eliminar(directorFormBean.directorBean.director)}"
+                                                 oncomplete="PF('eliminarDirector').hide()" update="grlEliminarDirector, :frmDirector:tblDirector"/>
+                                <p:commandButton value="NO" oncomplete="PF('eliminarDirector').hide()"/>
+                            </h:panelGrid>
+                        </p:confirmDialog>
                     </h:form>
                 </div>
             </ui:define>
         </ui:composition>
     </body>
 </html>
-

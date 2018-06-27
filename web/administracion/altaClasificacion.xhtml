@@ -8,45 +8,79 @@
         <title>Alta Clasificacion</title>
     </h:head>
     <body>
-        <p:growl id="growl" showDetail="false" sticky="false"/>
         <ui:composition template="./../templates/template.xhtml">
             <ui:define name="content">
                 <div id="tooplate_main">
-                    <h:form id="ListaClasificacion">
+                    <h:form id="frmClasificacion" rendered="#{usuarioControlFormBean.verificarSesion()}">
                         <p:panel header="Clasificación" footer="Sistema de Cine - 2018">
-                            <p:dataTable id="listClasificacion" paginator="true" rows="6">
+                            <p:dataTable id="tblClasificacion" paginator="true" rows="6" value="#{clasificacionFormBean.cargarClasificaciones()}" var="cla">
                                 <p:column headerText="Codigo">
-                                    <p:outputLabel value=""/>   
+                                    <p:outputLabel value="#{cla.codigo}"/>   
                                 </p:column>
 
                                 <p:column headerText="Clasificación">
-                                    <p:outputLabel value=""/>   
+                                    <p:outputLabel value="#{cla.descripcion}"/>   
                                 </p:column>
 
                                 <p:column headerText="Acciones" style="text-align: center">
-                                    <p:commandButton id="btnEditarPelicula" icon="ui-icon-pencil" oncomplete="" update=""/>
-                                    <p:commandButton id="btnEliminarPelicula" icon="ui-icon-trash" oncomplete="" update=""/>
+                                    <p:commandButton id="btnEditarPelicula" icon="ui-icon-pencil" oncomplete="PF('editarClasificacion').show()"
+                                                     actionListener="#{clasificacionFormBean.establecerClasificacion(cla)}" update="frmEditarClasificacion"/>
+                                    <p:commandButton id="btnEliminarPelicula" icon="ui-icon-trash" oncomplete="PF('eliminarClasificacion').show()"
+                                                     actionListener="#{clasificacionFormBean.establecerClasificacion(cla)}" update="frmEliminarClasificacion"/>
                                 </p:column>
                             </p:dataTable>
                             <br/>
-                            <p:commandButton value="Cargar Clasificación" oncomplete="PF('cargarClasificacion').show()"/>
+                            <p:commandButton id="btnAgregarClasificacion" value="Agregar Clasificación" oncomplete="PF('cargarClasificacion').show()"
+                                             actionListener="#{clasificacionFormBean.limpiarCampos()}" update="frmCargaClasificacion" />
                         </p:panel>
                     </h:form>
-                    <h:form>
+                    <h:form id="frmCargaClasificacion">
+                        <p:growl id="grlCargaClasificacion" showDetail="false" sticky="false"/>
                         <p:dialog header="Alta de Clasificacion" widgetVar="cargarClasificacion" modal="true" closable="true" resizable="false"
                                   showEffect="explode" hideEffect="explode">
                             <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid" >
+
                                 <p:outputLabel for="txtDescripcion" value="Descripción:"/>
-                                <p:inputText id="txtDescripcion" required="true"/>
-                                <h:panelGroup/>
-                                <p:commandButton id="btnGuardarDes" value="Agregar Descripción" update=""
-                                                 oncomplete="PF('cargarClasificacion').hide()"/>
+                                <p:inputText id="txtDescripcion" value="#{clasificacionFormBean.clasificacionBean.clasificacion.descripcion}" required="true" requiredMessage="Complete nombre de la clasificación"/>
+
+                                <p:commandButton id="btnGuardarClasificacion" value="Aceptar" actionListener="#{clasificacionFormBean.agregar(clasificacionFormBean.clasificacionBean.clasificacion)}"
+                                                 update="grlCargaClasificacion, :frmClasificacion:tblClasificacion"/>
+                                <p:commandButton id="btnCancelGuardarClasificacion" value="Cancelar" oncomplete="PF('cargarClasificacion').hide()"/>
                             </h:panelGrid>
                         </p:dialog>
+                    </h:form>
+                    <h:form id="frmEditarClasificacion">
+                        <p:growl id="grlEditarClasificacion" showDetail="false" sticky="false"/>
+                        <p:dialog header="Editar Clasificacion" widgetVar="editarClasificacion" modal="true" closable="true" resizable="false"
+                                  showEffect="explode" hideEffect="explode">
+                            <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid" >
+
+                                <p:outputLabel for="txtDescripcion" value="Descripción:"/>
+                                <p:inputText id="txtDescripcion" value="#{clasificacionFormBean.clasificacionBean.clasificacion.descripcion}" required="true" requiredMessage="Complete nombre de la clasificación"/>
+
+                                <p:commandButton id="btnEditarClasificacion" value="Aceptar" actionListener="#{clasificacionFormBean.editar(clasificacionFormBean.clasificacionBean.clasificacion)}"
+                                                 update="grlEditarClasificacion, :frmClasificacion:tblClasificacion"/>
+                                <p:commandButton id="btnCancelEditarClasificacion" value="Cancelar" oncomplete="PF('editarClasificacion').hide()"/>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                    <h:form id="frmEliminarClasificacion">
+                        <p:growl id="grlEliminarClasificacion" showDetail="false" sticky="false"/>
+                        <p:confirmDialog widgetVar="eliminarClasificacion" header="Eliminar Clasificacion"
+                                         message="¿Desea eliminar este item?" showEffect="explode" hideEffect="explode">
+                            <h:panelGrid columns="3" cellpadding="5" style="text-align: center">
+                                <p:outputLabel value="Clasificacion: "/>
+                                <p:outputLabel value="#{clasificacionFormBean.clasificacionBean.clasificacion.descripcion}"/>
+                                <h:panelGroup/>
+                                <h:panelGroup/>
+                                <p:commandButton value="SI" actionListener="#{clasificacionFormBean.eliminar(clasificacionFormBean.clasificacionBean.clasificacion)}"
+                                                 oncomplete="PF('eliminarClasificacion').hide()" update="grlEliminarClasificacion, :frmClasificacion:tblClasificacion"/>
+                                <p:commandButton value="NO" oncomplete="PF('eliminarClasificacion').hide()"/>
+                            </h:panelGrid>
+                        </p:confirmDialog>
                     </h:form>
                 </div>
             </ui:define>
         </ui:composition>
     </body>
 </html>
-

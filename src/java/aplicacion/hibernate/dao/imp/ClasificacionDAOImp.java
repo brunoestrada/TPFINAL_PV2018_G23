@@ -1,51 +1,51 @@
 package aplicacion.hibernate.dao.imp;
 
 import aplicacion.datos.hibernate.configuracion.HibernateUtil;
-import aplicacion.hibernate.dao.IPerfilDAO;
-import aplicacion.modelo.dominio.Perfil;
+import aplicacion.modelo.dominio.Clasificacion;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import aplicacion.hibernate.dao.IClasificacionDAO;
 
-public class PerfilDAOImp implements IPerfilDAO {
+public class ClasificacionDAOImp implements IClasificacionDAO {
 
     @Override
-    public void agregar(Perfil perfil) {
+    public void agregar(Clasificacion clasificacion) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.save(perfil);
+        session.save(clasificacion);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void editar(Perfil perfil) {
+    public void editar(Clasificacion clasificacion) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.update(perfil);
+        session.update(clasificacion);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void eliminar(Perfil perfil) {
+    public void eliminar(Clasificacion clasificacion) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.update(perfil);
+        session.update(clasificacion);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<Perfil> obtenerPerfiles() {
+    public List<Clasificacion> obtenerClasificaciones() {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
-        Criteria criteria = session.createCriteria(Perfil.class);
+        Criteria criteria = session.createCriteria(Clasificacion.class);
         criteria.add(Restrictions.eq("estado", true));
-        criteria.addOrder(Order.asc("usuario"));
-        List perfiles = criteria.list();
-        return perfiles;
+        criteria.addOrder(Order.asc("descripcion"));
+        List peliculas = criteria.list();
+        return peliculas;
     }
 
 }

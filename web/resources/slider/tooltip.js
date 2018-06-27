@@ -3,7 +3,7 @@ var tooltipOptions =
     showDelay: 10,
     hideDelay: 300,
     effect: "slide",
-    duration: 300,
+    duration: 200,
     relativeTo: "element",
     position: 0,
     smartPosition: true,

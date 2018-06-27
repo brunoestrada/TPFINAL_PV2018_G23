@@ -24,18 +24,6 @@ public class UsuarioDAOImp implements IUsuarioDAO {
     }
 
     @Override
-    public Usuario obtenerUsuario(String nombreUsuario) {
-        Usuario usuario = null;
-        Session session = HibernateUtil.getSESSION_FACTORY().openSession();
-        Criteria criteria = session.createCriteria(Usuario.class);
-        criteria.add(Restrictions.eq("nombreUsuario", nombreUsuario));
-        if (!criteria.list().isEmpty()) {
-            usuario = (Usuario) criteria.list().get(0);
-        }
-        return usuario;
-    }
-
-    @Override
     public void agregar(Usuario usuario) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();

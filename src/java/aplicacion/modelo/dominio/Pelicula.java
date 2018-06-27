@@ -2,75 +2,75 @@ package aplicacion.modelo.dominio;
 
 public class Pelicula {
 
-    private Integer pelCodigo;
-    private String pelNombre;
-    private String pelDescripcion;
-    private boolean pelEstado;
+    private Integer codigo;
+    private String nombre;
+    private String descripcion;
+    private boolean estado;
 
     public Pelicula() {
     }
 
     public Pelicula(Integer pelCodigo, String pelNombre, String pelDescripcion, boolean pelEstado) {
-        this.pelCodigo = pelCodigo;
-        this.pelNombre = pelNombre;
-        this.pelDescripcion = pelDescripcion;
-        this.pelEstado = pelEstado;
+        this.codigo = pelCodigo;
+        this.nombre = pelNombre;
+        this.descripcion = pelDescripcion;
+        this.estado = pelEstado;
     }
 
     /**
-     * @return the pelCodigo
+     * @return the codigo
      */
-    public Integer getPelCodigo() {
-        return pelCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param pelCodigo the pelCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setPelCodigo(Integer pelCodigo) {
-        this.pelCodigo = pelCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the pelNombre
+     * @return the nombre
      */
-    public String getPelNombre() {
-        return pelNombre;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
-     * @param pelNombre the pelNombre to set
+     * @param nombre the nombre to set
      */
-    public void setPelNombre(String pelNombre) {
-        this.pelNombre = pelNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
-     * @return the pelDescripcion
+     * @return the descripcion
      */
-    public String getPelDescripcion() {
-        return pelDescripcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
-     * @param pelDescripcion the pelDescripcion to set
+     * @param descripcion the descripcion to set
      */
-    public void setPelDescripcion(String pelDescripcion) {
-        this.pelDescripcion = pelDescripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     /**
-     * @return the pelEstado
+     * @return the estado
      */
-    public boolean isPelEstado() {
-        return pelEstado;
+    public boolean isEstado() {
+        return estado;
     }
 
     /**
-     * @param pelEstado the pelEstado to set
+     * @param estado the estado to set
      */
-    public void setPelEstado(boolean pelEstado) {
-        this.pelEstado = pelEstado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
 }

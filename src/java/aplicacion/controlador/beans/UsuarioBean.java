@@ -12,6 +12,12 @@ public class UsuarioBean implements Serializable {
     private Usuario usuario;
 
     public UsuarioBean() {
+//        Usuario usuarioSesion = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+//        if (usuarioSesion != null) {
+//            String nombreUsuario = usuarioSesion.getNombreUsuario();
+//            IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
+//            usuario = usuarioDAO.obtenerUsuario(nombreUsuario);
+//        }
         usuario = new Usuario();
     }
 

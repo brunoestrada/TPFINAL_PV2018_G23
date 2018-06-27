@@ -51,7 +51,7 @@ public class PerfilFormBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, facesmessage);
         }
     }
-    
+
     public void agregarPerfilInicial(Perfil perfil) {
         try {
             usuarioBean.getUsuario().setCodigo(0);
@@ -72,7 +72,7 @@ public class PerfilFormBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, facesmessage);
         }
     }
-    
+
     public void editarPerfil(Perfil perfil) {
         try {
             IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
@@ -87,8 +87,8 @@ public class PerfilFormBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, facesmessage);
         }
     }
-    
-    public void eliminarPerfil(Perfil perfil){
+
+    public void eliminarPerfil(Perfil perfil) {
         try {
             IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
             IPerfilDAO perfilDAO = new PerfilDAOImp();
@@ -127,7 +127,7 @@ public class PerfilFormBean implements Serializable {
         perfilBean.getPerfil().setEmail("");
         perfilBean.getPerfil().setFechaNac(null);
     }
-    
+
     public Date getFechaActual() {
         return new Date(System.currentTimeMillis());
     }
