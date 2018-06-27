@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Alta Clasificacion</title>
+    </h:head>
+    <body>
+        <p:growl id="growl" showDetail="false" sticky="false"/>
+        <ui:composition template="./../templates/template.xhtml">
+            <ui:define name="content">
+                <div id="tooplate_main">
+                    <h:form id="ListaClasificacion">
+                        <p:panel header="Clasificación" footer="Sistema de Cine - 2018">
+                            <p:dataTable id="listClasificacion" paginator="true" rows="6">
+                                <p:column headerText="Codigo">
+                                    <p:outputLabel value=""/>   
+                                </p:column>
+
+                                <p:column headerText="Clasificación">
+                                    <p:outputLabel value=""/>   
+                                </p:column>
+
+                                <p:column headerText="Acciones" style="text-align: center">
+                                    <p:commandButton id="btnEditarPelicula" icon="ui-icon-pencil" oncomplete="" update=""/>
+                                    <p:commandButton id="btnEliminarPelicula" icon="ui-icon-trash" oncomplete="" update=""/>
+                                </p:column>
+                            </p:dataTable>
+                            <br/>
+                            <p:commandButton value="Cargar Clasificación" oncomplete="PF('cargarClasificacion').show()"/>
+                        </p:panel>
+                    </h:form>
+                    <h:form>
+                        <p:dialog header="Alta de Clasificacion" widgetVar="cargarClasificacion" modal="true" closable="true" resizable="false"
+                                  showEffect="explode" hideEffect="explode">
+                            <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid" >
+                                <p:outputLabel for="txtDescripcion" value="Descripción:"/>
+                                <p:inputText id="txtDescripcion" required="true"/>
+                                <h:panelGroup/>
+                                <p:commandButton id="btnGuardarDes" value="Agregar Descripción" update=""
+                                                 oncomplete="PF('cargarClasificacion').hide()"/>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+
