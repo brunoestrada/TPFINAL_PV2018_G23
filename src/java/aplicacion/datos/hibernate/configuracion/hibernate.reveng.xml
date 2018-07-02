@@ -48,4 +48,5 @@ Contributor(s):
     <table-filter match-name="perfiles"/>
     <table-filter match-name="clasificaciones"/>
     <table-filter match-name="directores"/>
+    <table-filter match-name="actores"/>
 </hibernate-reverse-engineering>

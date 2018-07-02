@@ -3,53 +3,127 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Alta director</title>
+        <title>ABM ACTOR</title>
     </h:head>
-    <body>
+    <h:body>
         <p:growl id="growl" showDetail="false" sticky="false"/>
+
         <ui:composition template="./../templates/template.xhtml">
             <ui:define name="content">
                 <div id="tooplate_main">
-                    <h:form id="ListaActor">
-                        <p:panel header="Actor" footer="Sistema de Cine - 2018">
-                            <p:dataTable id="listActor" paginator="true" rows="6">
-                                <p:column headerText="Apellido">
-                                    <p:outputLabel value=""/>   
-                                </p:column>
+                    <div>
+                        <h:form id="frmListaActor">
+                            <p:panel header="Actor" footer="Sistema de Cine - 2018" style="width:1150px;">
+                                <p:dataTable id="tblListaActor" value="#{actorFormBean.cargarTabla()}" var="act" rows="6" paginator="true" 
+                                             emptyMessage="Sin coincidencias" filteredValue="#{act}">
+                                    
+                                    <p:column headerText="Apellidos" style="text-align: center"
+                                              filterBy="#{act.actApellidos}}"  filterMatchMode="contains">
+                                        <h:outputText value="#{act.actApellidos}"/>   
+                                    </p:column>
 
-                                <p:column headerText="Nombre">
-                                    <p:outputLabel value=""/>   
-                                </p:column>
-                                
-                                <p:column headerText="Acciones" style="text-align: center">
-                                    <p:commandButton id="btnEditarPelicula" icon="ui-icon-pencil" oncomplete="" update=""/>
-                                    <p:commandButton id="btnEliminarPelicula" icon="ui-icon-trash" oncomplete="" update=""/>
-                                </p:column>
-                            </p:dataTable>
-                            <br/>
-                            <p:commandButton value="Cargar Actor" oncomplete="PF('cargarActor').show()"/>
-                        </p:panel>
-                    </h:form>
-                    <h:form>
-                        <p:dialog header="Alta de Actor" widgetVar="cargarActor" modal="true" resizable="false" closable="true"
-                                  showEffect="explode" hideEffect="explode">
-                                <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid" >
-                                    <p:outputLabel for="txtApellidoDir" value="Apellido:"/>
-                                    <p:inputText id="txtApellidoDir" required="true"/>
+                                    <p:column headerText="Nombre" style="text-align: center">
+                                        <p:outputLabel value="#{act.actNombres}"/>   
+                                    </p:column>
 
-                                    <p:outputLabel for="txtNombreDir" value="Nombre:"/>
-                                    <p:inputText id="txtNombreDir"  required="true"/>
+                                    <p:column headerText="Acciones" style="text-align: center">
+                                        <p:commandButton icon="ui-icon-pencil" oncomplete="PF('editarActor').show()" update=":frmEditarActor"
+                                                         actionListener="#{actorFormBean.establecerActor(act)}"/>
+                                        <p:commandButton icon="ui-icon-trash" oncomplete="PF('eliminarActor').show()" update=":frmEliminarActor"
+                                                         actionListener="#{actorFormBean.establecerActor(act)}"/>
+                                    </p:column>
 
-                                    <h:panelGroup/>
-                                    <p:commandButton id="btnGuardarDir" value="Agregar Actor" update="" oncomplete="PF('cargarActor').hide()"/>
+                                </p:dataTable>
+                                <p:commandButton value="Cargar Actor" oncomplete="PF('cargarActor').show()"
+                                                 actionListener="#{actorFormBean.limpiarCampos()}"
+                                                 update=":frmCargaActor"/>
+                            </p:panel>
+                        </h:form>
+
+
+
+                        <h:form id="frmCargaActor">
+                            <p:growl id="grlMensajes" showDetail="false" sticky="false" />
+
+                            <p:dialog widgetVar="cargarActor" modal="true" header="Agregar nuevo Actor" showEffect="explode" hideEffect="explode" resizable="false">
+
+
+                                <p:panel header="Alta Actor" footer="Sistema de Cine - 2018" style="width:800px;">
+                                    <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid"
+                                                 style="border:none;margin:0 auto;width:500px;">
+
+                                        <p:outputLabel for="txtApellidoActAlta" value="Apellidos:"/>
+                                        <p:inputText id="txtApellidoActAlta" required="true" requiredMessage="Ingrese Apellidos del Actor"
+                                                     value="#{actorFormBean.actorBean.actor.actApellidos}"/>
+
+                                        <p:outputLabel for="txtNombreActAlta" value="Nombres:"/>
+                                        <p:inputText id="txtNombreActAlta" required="true" requiredMessage="Ingrese Nombres del Actor"
+                                                     value="#{actorFormBean.actorBean.actor.actNombres}"/>
+
+                                        <p:commandButton id="btnGuardarActor" value="Guardar Actor" update="grlMensajes, :frmListaActor:tblListaActor"
+                                                         actionListener="#{actorFormBean.agregarActor(actorFormBean.actorBean.actor)}"/>
+
+                                        <p:commandButton id="btnCancelarGuardarActor" value="Cancelar" oncomplete="PF(':cargarActor).hide()"/>
+
+
+                                    </h:panelGrid>
+                                </p:panel>
+                            </p:dialog>
+                        </h:form>
+
+                        <h:form id="frmEditarActor">
+                            <p:growl id="grlMensajesEditar" showDetail="false" sticky="false"/>
+                            <p:dialog widgetVar="editarActor" modal="true">
+                                <p:panel header="Editar Actor" footer="Sistema de Cine - 2018" style="width: 600px">
+                                    <h:panelGrid columns="2" cellpadding="5"  styleClass="panelGrid">
+                                        <p:outputLabel for="txtApellidosActEditar" value="Apellidos del Actor:"/>
+                                        <p:inputText id="txtApellidosActEditar" required="true" requiredMessage="Ingrese los Apellidos" 
+                                                     value="#{actorFormBean.actorBean.actor.actApellidos}"/>
+                                        <p:outputLabel for="txtNombresActEditar" value="Nombres del Actor:"/>
+                                        <p:inputText id="txtNombresActEditar" required="true" requiredMessage="Ingrese los Nombres" 
+                                                     value="#{actorFormBean.actorBean.actor.actNombres}"/>
+
+                                        <p:commandButton id="btnGuardarEditarActor" value="Guardar Actor" 
+                                                         update="grlMensajesEditar,:frmListaActor:tblListaActor"
+                                                         actionListener="#{actorFormBean.editarActor(actorFormBean.actorBean.actor)}"/>
+
+                                        <p:commandButton id="btnCancelarGuardarEditarActor" value="Cancelar" update="frmEditarActor"
+                                                         actionListener="#{actorFormBean.limpiarCampos()}"
+                                                         oncomplete="PF('editarActor').hide()"/>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                            </p:dialog>
+
+                        </h:form>
+
+                        <h:form id="frmEliminarActor">
+                            <p:growl id="grlMensajesEditar" showDetail="false" sticky="false"/>
+                            <p:confirmDialog widgetVar="eliminarActor" header="Eliminar"
+                                             message="¿Desea eliminar este Actor?" showEffect="explode" hideEffect="explode">
+                                <h:panelGrid columns="2" cellpadding="5" style="text-align: center">
+                                    <p:outputLabel value="Actor: "/>
+                                    <p:outputLabel value="#{actorFormBean.actorBean.actor.actNombres}, #{actorFormBean.actorBean.actor.actApellidos} " />
+                                    
+                                    <p:commandButton value="SI" actionListener="#{actorFormBean.eliminarActor(act)}"
+                                                     oncomplete="PF('eliminarActor').hide()" update=":frmListaActor:tblListaActor, grlMensajesEditar"/>
+                                    <p:commandButton value="NO" oncomplete="PF('eliminarActor').hide()"/>
+
                                 </h:panelGrid>
-                        </p:dialog>
-                    </h:form>
+
+                            </p:confirmDialog>
+
+                        </h:form>
+
+                    </div>
+
                 </div>
             </ui:define>
         </ui:composition>
-    </body>
+
+    </h:body>
 </html>
 

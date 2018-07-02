@@ -45,11 +45,12 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cine?</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.password">mysql2470</property>
     <mapping resource="aplicacion/datos/hibernate/mapeos/Perfiles.hbm.xml"/>
     <mapping resource="aplicacion/datos/hibernate/mapeos/Usuarios.hbm.xml"/>
     <mapping resource="aplicacion/datos/hibernate/mapeos/Peliculas.hbm.xml"/>
     <mapping resource="aplicacion/datos/hibernate/mapeos/Clasificaciones.hbm.xml"/>
     <mapping resource="aplicacion/datos/hibernate/mapeos/Directores.hbm.xml"/>
+    <mapping resource="aplicacion/datos/hibernate/mapeos/Actores.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
