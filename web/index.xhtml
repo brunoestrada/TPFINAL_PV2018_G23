@@ -9,6 +9,7 @@
         <title>Ingreso</title>
     </h:head>
     <body>
+        <f:view locale="en">
         <ui:composition template="./templates/template.xhtml">
             <ui:define name="top">
 
@@ -16,57 +17,57 @@
             <ui:define name="content">
                 <h:form id="frmLogin">
                     <p:growl id="grlLogin" showDetail="false" sticky="false"/>
-                    <p:panel header="Acceso al Sistema de Cine" footer="APU 2008 - Programacion visual 2018">
+                    <p:panel header="#{msg['index.headerText']}" footer="APU 2008 - Programacion visual 2018" style="text-align: center"  >
                         <h:panelGrid columns="2" cellpadding="5" >
-                            <p:outputLabel for="txtNombreUsuario" value="Nombre de Usuario"/>
-                            <p:inputText id="txtNombreUsuario" required="true" requiredMessage="Ingrese usuario" value="#{loginFormBean.nombreUsuario}"/>
+                            <p:outputLabel for="txtNombreUsuario" value="#{msg['index.usuario.nombre.titulo']}"/>
+                            <p:inputText id="txtNombreUsuario" required="true" requiredMessage="#{msg['index.usuario.nombreMsg']}" value="#{loginFormBean.nombreUsuario}"/>
 
-                            <p:outputLabel for="txtContraseña" value="Contraseña"/>
-                            <p:password id="txtContraseña" required="true" requiredMessage="Ingrese contraseña" value="#{loginFormBean.password}" />
+                            <p:outputLabel for="txtContraseña" value="#{msg['index.usuario.contraseña.titulo']}"/>
+                            <p:password id="txtContraseña" required="true" requiredMessage="#{msg['index.usuario.contraseña.tituloMsg']}" value="#{loginFormBean.password}" />
 
-                            <p:commandButton id="btnNuevaCuenta" value="Crear cuenta" icon="ui-icon-plus" oncomplete="PF('crearCuenta').show()"
+                            <p:commandButton id="btnNuevaCuenta" value="#{msg['index.usuario.nuevo']}" icon="ui-icon-plus" oncomplete="PF('crearCuenta').show()"
                                              actionListener="#{perfilFormBean.limpiarCampos()}" />
-                            <p:commandButton id="btnValidar" value="Ingresar" icon="ui-icon-check" update=":frmLogin:grlLogin" action="#{loginFormBean.validarUsuario()}"/>
+                            <p:commandButton id="btnValidar" value="#{msg['index.usuario.ingreso']}" icon="ui-icon-check" update=":frmLogin:grlLogin" action="#{loginFormBean.validarUsuario()}"/>
                         </h:panelGrid>
                     </p:panel>
                 </h:form>
                 <h:form id="frmNuevaCuenta">
-                    <p:dialog id="dlgNuevaCuenta" header="Crear nueva cuenta" footer="Sistema de Cine" widgetVar="crearCuenta"
-                              showEffect="explode" hideEffect="explode" modal="true">
+                    <p:dialog id="dlgNuevaCuenta" header="#{msg['index.perfil.nuevo']}"  style="text-align: center" footer="#{msg['index.headerText']}" widgetVar="crearCuenta"
+                              showEffect="explode" hideEffect="explode" modal="true" >
                         <p:growl id="grlNuevaCuenta" sticky="false" showDetail="false"/>
                         <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid">
-                            <p:outputLabel for="txtNombre" value="Nombre de usuario:"/>
-                            <p:inputText id="txtNombre" required="true" requiredMessage="Ingrese Nombre de Usuario" value="#{perfilFormBean.usuarioBean.usuario.nombreUsuario}"/>
+                            <p:outputLabel for="txtNombre" value="#{msg['index.usuario.nombre.titulo']}"/>
+                            <p:inputText id="txtNombre" required="true" requiredMessage="#{msg['index.perfil.nombreMsg']}" value="#{perfilFormBean.usuarioBean.usuario.nombreUsuario}"/>
 
-                            <p:outputLabel for="txtPassword" value="Password:"/>
-                            <p:password id="txtPassword" maxlength="8" requiredMessage="Ingrese Password" required="true" value="#{perfilFormBean.usuarioBean.usuario.password}"/>
+                            <p:outputLabel for="txtPassword" value="#{msg['index.usuario.contraseña.titulo']}"/>
+                            <p:password id="txtPassword" maxlength="8" requiredMessage="#{msg['index.usuario.contraseñaMsg']}" required="true" value="#{perfilFormBean.usuarioBean.usuario.password}"/>
 
-                            <p:outputLabel for="txtNombrePerfil" value="Nombre Perfil:"/>
-                            <p:inputText id="txtNombrePerfil" required="true" requiredMessage="Ingrese Nombre" value="#{perfilFormBean.perfilBean.perfil.nombre}"/>
+                            <p:outputLabel for="txtNombrePerfil" value="#{msg['index.perfil.titulo']}:"/>
+                            <p:inputText id="txtNombrePerfil" required="true" requiredMessage="#{msg['index.perfil.nombreMsg']}" value="#{perfilFormBean.perfilBean.perfil.nombre}"/>
 
-                            <p:outputLabel for="txtApellidoPerfil" value="Apellido Perfil:"/>
-                            <p:inputText id="txtApellidoPerfil" required="true" requiredMessage="Ingrese Apellido" value="#{perfilFormBean.perfilBean.perfil.apellido}"/>
+                            <p:outputLabel for="txtApellidoPerfil" value="#{msg['index.perfil.apellido']}"/>
+                            <p:inputText id="txtApellidoPerfil" required="true" requiredMessage="#{msg['index.perfil.apellidoMsg']}" value="#{perfilFormBean.perfilBean.perfil.apellido}"/>
 
-                            <p:outputLabel for="txtDniPerfil" value="DNI Perfil:"/>
-                            <p:inputMask id="txtDniPerfil" mask="99999999" required="true" requiredMessage="Ingrese DNI" value="#{perfilFormBean.perfilBean.perfil.dni}"/>
+                            <p:outputLabel for="txtDniPerfil" value="#{msg['index.perfil.dni']}:"/>
+                            <p:inputMask id="txtDniPerfil" mask="99999999" required="true" requiredMessage="#{msg['index.perfil.dniMsg']}" value="#{perfilFormBean.perfilBean.perfil.dni}"/>
 
-                            <p:outputLabel for="txtFechaNac" value="FechaNac Perfil:"/>
-                            <p:calendar id="txtFechaNac" pattern="dd-MM-yyyy" required="true" mask="true" requiredMessage="Ingrese Fecha de Nacimiento"
+                            <p:outputLabel for="txtFechaNac" value="#{msg['index.perfil.fechaNac']}"/>
+                            <p:calendar id="txtFechaNac" pattern="dd-MM-yyyy" required="true" mask="true" requiredMessage="#{msg['index.perfil.fechaNaMsgc']}"
                                         size="10" maxlength="10" locale="es" maxdate="#{perfilFormBean.fechaActual}" value="#{perfilFormBean.perfilBean.perfil.fechaNac}"/>
 
-                            <p:outputLabel for="txtEmailPerfil" value="Email Perfil:"/>
-                            <p:inputText id="txtEmailPerfil" required="true" requiredMessage="Ingrese Email" validatorMessage="Ingrese un email valido"
+                            <p:outputLabel for="txtEmailPerfil" value="#{msg['index.perfil.email']}:"/>
+                            <p:inputText id="txtEmailPerfil" required="true" requiredMessage="#{msg['index.perfil.emailMSg']}" validatorMessage="#{msg['index.perfil.emailMSgV']}"
                                          value="#{perfilFormBean.perfilBean.perfil.email}">
                                 <f:validator validatorId="emailValidator"/>
                             </p:inputText>
 
-                            <p:outputLabel for="txtDireccionPerfil" value="Direccion Perfil:"/>
-                            <p:inputText id="txtDireccionPerfil" required="true" requiredMessage="Ingrese Dirección" value="#{perfilFormBean.perfilBean.perfil.direccion}"/>
+                            <p:outputLabel for="txtDireccionPerfil" value="#{msg['index.perfil.direccion']}:"/>
+                            <p:inputText id="txtDireccionPerfil" required="true" requiredMessage="#{msg['index.perfil.direccionMsg']}" value="#{perfilFormBean.perfilBean.perfil.direccion}"/>
 
-                            <p:commandButton id="btnGuardarPerfil" icon="ui-icon-check" value="Aceptar" update=":frmNuevaCuenta:grlNuevaCuenta" 
+                            <p:commandButton id="btnGuardarPerfil" icon="ui-icon-check" value="#{msg['index.perfil.acepta']}" update=":frmNuevaCuenta:grlNuevaCuenta" 
                                              actionListener="#{perfilFormBean.agregarPerfilInicial(perfilFormBean.perfilBean.perfil)}"/>
 
-                            <p:commandButton id="btnCancelarGuardarPerfil" icon="ui-icon-close" value="Cancelar" oncomplete="PF('crearCuenta').hide()" />
+                            <p:commandButton id="btnCancelarGuardarPerfil" icon="ui-icon-close" value="#{msg['index.perfil.cancela']}" oncomplete="PF('crearCuenta').hide()" />
                         </h:panelGrid>
                     </p:dialog>
                 </h:form>
@@ -75,6 +76,7 @@
 
             </ui:define>
         </ui:composition>
+            </f:view>
     </body>
 </html>
 
