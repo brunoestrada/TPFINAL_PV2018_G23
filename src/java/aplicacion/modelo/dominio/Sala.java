@@ -1,78 +1,109 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Sala implements Serializable {
 
-    private Integer salCodigo;
-    private String salNombre;
-    private String salDescripcion;
-    private boolean salEstado;
+    private Integer codigo;
+    private String nombre;
+    private String descripcion;
+    private boolean estado;
 
     public Sala() {
     }
 
     public Sala(Integer salCodigo, String salNombre, String salDescripcion, boolean salEstado) {
-        this.salCodigo = salCodigo;
-        this.salNombre = salNombre;
-        this.salDescripcion = salDescripcion;
-        this.salEstado = salEstado;
+        this.codigo = salCodigo;
+        this.nombre = salNombre;
+        this.descripcion = salDescripcion;
+        this.estado = salEstado;
     }
 
     /**
-     * @return the salCodigo
+     * @return the codigo
      */
-    public Integer getSalCodigo() {
-        return salCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param salCodigo the salCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setSalCodigo(Integer salCodigo) {
-        this.salCodigo = salCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the salNombre
+     * @return the nombre
      */
-    public String getSalNombre() {
-        return salNombre;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
-     * @param salNombre the salNombre to set
+     * @param nombre the nombre to set
      */
-    public void setSalNombre(String salNombre) {
-        this.salNombre = salNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
-     * @return the salDescripcion
+     * @return the descripcion
      */
-    public String getSalDescripcion() {
-        return salDescripcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
-     * @param salDescripcion the salDescripcion to set
+     * @param descripcion the descripcion to set
      */
-    public void setSalDescripcion(String salDescripcion) {
-        this.salDescripcion = salDescripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     /**
-     * @return the salEstado
+     * @return the estado
      */
-    public boolean isSalEstado() {
-        return salEstado;
+    public boolean isEstado() {
+        return estado;
     }
 
     /**
-     * @param salEstado the salEstado to set
+     * @param estado the estado to set
      */
-    public void setSalEstado(boolean salEstado) {
-        this.salEstado = salEstado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.codigo;
+        hash = 61 * hash + Objects.hashCode(this.nombre);
+        hash = 61 * hash + Objects.hashCode(this.descripcion);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sala other = (Sala) obj;
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        return true;
     }
 
 }

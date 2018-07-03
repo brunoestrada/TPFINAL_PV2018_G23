@@ -1,87 +1,101 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>Alta Pelicula</title>
-    </h:head>
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <body>
         <ui:composition template="./../templates/template.xhtml">
             <ui:define name="content">
                 <div id="tooplate_main">
                     <h:form id="frmPelicula" rendered="#{usuarioControlFormBean.verificarSesion()}">
-                        <p:panel header="#{msg['altaPelicula.header']}" footer="#{msg['altaClasif.footer']}"  style="text-justify: distribute" >
-                            <p:dataTable id="tblPeliculas" paginator="true" rows="6" value="#{peliculaFormBean.cargarPeliculas()}" var="peli">
-                                <p:column headerText="#{msg['altaDirector.nombre']}">
-                                    <p:outputLabel value="#{peli.nombre}"/>   
+                        <p:panel header="Peliculas" footer="Sistema de Cine - 2018">
+                            <p:dataTable id="tblPeliculas" paginator="true" rows="6" value="#{peliClasFormBean.cargarPeliculas()}" var="peli">
+                                <p:column headerText="Nombre">
+                                    <p:outputLabel value="#{peli.pelicula.nombre}"/>   
                                 </p:column>
 
-                                <p:column headerText="#{msg['altaClasif.carga.descripcion']}">
-                                    <p:outputLabel value="#{peli.descripcion}"/>   
+                                <p:column headerText="Descripción">
+                                    <p:outputLabel value="#{peli.pelicula.descripcion}"/>   
                                 </p:column>
 
-                                <p:column headerText="#{msg['altaClasif.acciones']}" style="text-align: center">
-                                    <p:commandButton id="btnEditarPelicula" icon="ui-icon-pencil" actionListener="#{peliculaFormBean.establecerPelicula(peli)}"
+                                <p:column headerText="Clasificacion">
+                                    <p:outputLabel value="#{peli.clasificacion.descripcion}"/>   
+                                </p:column>
+
+                                <p:column headerText="Acciones" style="text-align: center">
+                                    <p:commandButton id="btnEditarPelicula" icon="ui-icon-pencil" actionListener="#{peliClasFormBean.establecerPelicula(peli)}"
                                                      update="frmEditarPelicula" oncomplete="PF('editarPelicula').show()"/>
-                                    <p:commandButton id="btnEliminarPelicula" icon="ui-icon-trash" actionListener="#{peliculaFormBean.establecerPelicula(peli)}"
+                                    <p:commandButton id="btnEliminarPelicula" icon="ui-icon-trash" actionListener="#{peliClasFormBean.establecerPelicula(peli)}"
                                                      update="frmEliminarPelicula" oncomplete="PF('eliminarPelicula').show()"/>
                                 </p:column>
                             </p:dataTable>
                             <br/>
-                            <p:commandButton id="btnAgregarPelicula" value="#{msg['altaPelicula.carga.titulo']}" oncomplete="PF('cargarPelicula').show()"
-                                             actionListener="#{peliculaFormBean.limpiarCampos()}" update="frmCargaPelicula"/>  
+                            <p:commandButton id="btnAgregarPelicula" value="Agregar Pelicula" oncomplete="PF('cargarPelicula').show()"
+                                             actionListener="#{peliClasFormBean.limpiarCampos()}" update="frmCargaPelicula"/>  
                         </p:panel>
                     </h:form>
                     <h:form id="frmCargaPelicula">
                         <p:growl id="grlCargaPelicula" showDetail="false" sticky="false"/>
-                        <p:dialog widgetVar="cargarPelicula" modal="true" header="#{msg['altaPelicula.carga.titulo']}" closable="true" resizable="false">
+                        <p:dialog widgetVar="cargarPelicula" modal="true" header="Alta de Pelicula" closable="true" resizable="false">
                             <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid">
-                                <p:outputLabel for="txtPelicula" value="#{msg['altaDirector.nombre']}"/>
-                                <p:inputText id="txtPelicula" required="true" requiredMessage="#{msg['altaPelicula.carga.nombreMsg']}"
-                                             value="#{peliculaFormBean.peliculaBean.pelicula.nombre}"/>
+                                <p:outputLabel for="txtPelicula" value="Nombre:"/>
+                                <p:inputText id="txtPelicula" required="true" requiredMessage="Complete nombre de pelicula"
+                                             value="#{peliClasFormBean.peliClasBean.pelCla.pelicula.nombre}"/>
 
-                                <p:outputLabel for="txtDescripcion" value="#{msg['altaClasif.carga.descripcion']}"/>
-                                <p:inputText id="txtDescripcion" required="true" requiredMessage="#{msg['altaPelicula.carga.descripcionMsg']}"
-                                             value="#{peliculaFormBean.peliculaBean.pelicula.descripcion}"/>
+                                <p:outputLabel for="txtDescripcion" value="Descripcion:"/>
+                                <p:inputText id="txtDescripcion" required="true" requiredMessage="Complete descripcion de pelicula"
+                                             value="#{peliClasFormBean.peliClasBean.pelCla.pelicula.descripcion}"/>
 
-                                <p:commandButton id="btnGuardarPeli" value="#{msg['altaClasif.carga.aceptar']}" actionListener="#{peliculaFormBean.agregar(peliculaFormBean.peliculaBean.pelicula)}"
+                                <p:outputLabel for="txtClasificacion" value="Clasificacion:"/>
+                                <p:selectOneMenu id="txtClasificacion" converter="clasificacionConverter" value="#{peliClasFormBean.peliClasBean.pelCla.clasificacion}" >
+                                    <f:selectItem itemLabel="Seleccione Clasificacion" itemValue=""/>
+                                    <f:selectItems value="#{clasificacionFormBean.cargarClasificaciones()}" var="cla" itemLabel="#{cla.descripcion}" itemValue="#{cla}"/>
+                                </p:selectOneMenu>
+                                 
+                                <p:commandButton id="btnGuardarPeli" value="Aceptar" actionListener="#{peliClasFormBean.agregar(peliClasFormBean.peliClasBean.pelCla)}"
                                                  update="grlCargaPelicula, :frmPelicula:tblPeliculas"/>
-                                <p:commandButton id="btnCancelGuardarPeli" value="#{msg['altaDirector.carga.cancelar']}" oncomplete="PF('cargarPelicula').hide()"/>
+                                <p:commandButton id="btnCancelGuardarPeli" value="Cancelar" oncomplete="PF('cargarPelicula').hide()"/>
                             </h:panelGrid>  
                         </p:dialog>
                     </h:form>
                     <h:form id="frmEditarPelicula">
                         <p:growl id="grlEditarPelicula" showDetail="false" sticky="false"/>
-                        <p:dialog widgetVar="editarPelicula" modal="true" header="#{msg['altaPelicula.editar.titulo']}" closable="true" resizable="false">
+                        <p:dialog widgetVar="editarPelicula" modal="true" header="Edicion de Pelicula" closable="true" resizable="false">
                             <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid">
-                                <p:outputLabel for="txtPelicula" value="#{msg['altaDirector.nombre']}"/>
-                                <p:inputText id="txtPelicula" required="true" requiredMessage="#{msg['altaPelicula.carga.nombreMsg']}"
-                                             value="#{peliculaFormBean.peliculaBean.pelicula.nombre}"/>
+                                <p:outputLabel for="txtPelicula" value="Nombre:"/>
+                                <p:inputText id="txtPelicula" required="true" requiredMessage="Complete nombre de pelicula"
+                                             value="#{peliClasFormBean.peliClasBean.pelCla.pelicula.nombre}"/>
 
-                                <p:outputLabel for="txtDescripcion" value="#{msg['altaClasif.carga.descripcion']}:"/>
-                                <p:inputText id="txtDescripcion" required="true" requiredMessage="#{msg['altaPelicula.carga.descripcionMsg']}"
-                                             value="#{peliculaFormBean.peliculaBean.pelicula.descripcion}"/>
+                                <p:outputLabel for="txtDescripcion" value="Descripcion:"/>
+                                <p:inputText id="txtDescripcion" required="true" requiredMessage="Complete descripcion de pelicula"
+                                             value="#{peliClasFormBean.peliClasBean.pelCla.pelicula.descripcion}"/>
 
-                                <p:commandButton id="btnEditarPeli" value="#{msg['altaClasif.carga.aceptar']}" actionListener="#{peliculaFormBean.editar(peliculaFormBean.peliculaBean.pelicula)}"
+                                <p:outputLabel for="txtClasificacion" value="Clasificacion:"/>
+                                <p:selectOneMenu id="txtClasificacion" converter="clasificacionConverter" value="#{peliClasFormBean.peliClasBean.pelCla.clasificacion}" >
+                                    <f:selectItem itemLabel="Seleccione Clasificacion" itemValue=""/>
+                                    <f:selectItems value="#{clasificacionFormBean.cargarClasificaciones()}" var="cla" itemLabel="#{cla.descripcion}" itemValue="#{cla}"/>
+                                </p:selectOneMenu>
+
+                                <p:commandButton id="btnEditarPeli" value="Aceptar" actionListener="#{peliClasFormBean.editar(peliClasFormBean.peliClasBean.pelCla)}"
                                                  update="grlEditarPelicula, :frmPelicula:tblPeliculas"/>
-                                <p:commandButton id="btnCancelEditarPeli" value="#{msg['altaDirector.carga.cancelar']}" oncomplete="PF('editarPelicula').hide()"/>
+                                <p:commandButton id="btnCancelEditarPeli" value="Cancelar" oncomplete="PF('editarPelicula').hide()"/>
                             </h:panelGrid>  
                         </p:dialog>
                     </h:form>
                     <h:form id="frmEliminarPelicula">
                         <p:growl id="grlEliminarPelicula" showDetail="false" sticky="false"/>
-                        <p:confirmDialog widgetVar="eliminarPelicula" header="#{msg['altaPelicula.eliminar.titulo']}"
-                                         message="#{msg['altaClasif.eliminar.msg']}" showEffect="explode" hideEffect="explode">
+                        <p:confirmDialog widgetVar="eliminarPelicula" header="Eliminar Pelicula"
+                                         message="¿Desea eliminar este item?" showEffect="explode" hideEffect="explode">
                             <h:panelGrid columns="3" cellpadding="5" style="text-align: center">
-                                <p:outputLabel value="#{msg['altaPelicula.header']} "/>
-                                <p:outputLabel value="#{peliculaFormBean.peliculaBean.pelicula.nombre}"/>
+                                <p:outputLabel value="Pelicula: "/>
+                                <p:outputLabel value="#{peliClasFormBean.peliClasBean.pelCla.pelicula.nombre}"/>
                                 <h:panelGroup/>
                                 <h:panelGroup/>
-                                <p:commandButton value="#{msg['altaClasif.eliminar.si']}" actionListener="#{peliculaFormBean.eliminar(peliculaFormBean.peliculaBean.pelicula)}"
+                                <p:commandButton value="SI" actionListener="#{peliClasFormBean.eliminar(peliClasFormBean.peliClasBean.pelCla)}"
                                                  oncomplete="PF('eliminarPerfilUsuario').hide()" update="grlEliminarPelicula, :frmPelicula:tblPeliculas"/>
-                                <p:commandButton value="#{msg['altaClasif.eliminar.no']}" oncomplete="PF('eliminarPelicula').hide()"/>
+                                <p:commandButton value="NO" oncomplete="PF('eliminarPelicula').hide()"/>
                             </h:panelGrid>
                         </p:confirmDialog>
                     </h:form>
@@ -90,4 +104,3 @@
         </ui:composition>
     </body>
 </html>
-

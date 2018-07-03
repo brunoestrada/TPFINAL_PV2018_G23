@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../templates/template.xhtml">
+            <ui:define name="content">
+                <div id="tooplate_main">
+                    <h:form id="frmVentas" rendered="#{usuarioControlFormBean.verificarSesion()}">
+                        <p:panel header="Venta de Entradas" >
+                            <p:dataTable id="tblVentas" paginator="true" rows="6" value="#{ventaFormBean.cargarVentas()}" var="vent">
+                                <p:column headerText="Fecha" style="text-align: center">
+                                    <p:outputLabel value="#{vent.butacaCartelera.cartelera.fecha}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:outputLabel>
+                                </p:column>
+                                
+                                <p:column headerText="Asiento" style="text-align: center">
+                                    <p:outputLabel value="#{vent.butacaCartelera.identificadorButaca}"/>   
+                                </p:column>
+                                
+                                <p:column headerText="Vendedor" style="text-align: center">
+                                    <p:outputLabel value="#{vent.perfil.nombre}, #{vent.perfil.apellido}"/>   
+                                </p:column>
+                                
+                                <p:column headerText="Precio" style="text-align: center">
+                                    <p:outputLabel value="$#{vent.precio}"/>   
+                                </p:column>
+
+                                <p:column headerText="Sala" style="text-align: center">
+                                    <p:outputLabel value="#{vent.butacaCartelera.cartelera.sala.nombre}"/>   
+                                </p:column>
+                                
+                                <p:column headerText="Descripcion" style="text-align: center">
+                                    <p:outputLabel value="#{vent.descripcion}"/>   
+                                </p:column>
+
+                                <p:column headerText="Acciones" style="text-align: center">
+                                    <p:commandButton id="btnEditarCartelera" icon="ui-icon-pencil" />
+                                    <p:commandButton id="btnEliminarCartelera" icon="ui-icon-trash" />
+                                </p:column>
+                            </p:dataTable>
+                            <br/>
+                            <p:commandButton id="btnAgregarVenta" value="Agregar Venta" oncomplete="PF('cargarVenta').show()"
+                                             actionListener="#{ventaFormBean.limpiarCampos()}" update="frmCargaVenta"/>  
+                        </p:panel>
+                    </h:form>
+                    <h:form id="frmCargaVenta" rendered="#{usuarioControlFormBean.verificarSesion()}">
+                        <p:growl id="grlCargaVenta" showDetail="false" sticky="false"/>
+                        <p:dialog widgetVar="cargarVenta" modal="true" header="Alta de Cartelera" closable="true" resizable="false">
+                            <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid">
+                                
+                                <p:outputLabel for="txtButaca" value="Butaca:"/>
+                                <p:selectOneMenu id="txtButaca" converter="butacaCartConverter" value="#{ventaFormBean.ventaBean.venta.butacaCartelera}" >
+                                    <f:selectItem itemLabel="Seleccione Pelicula" itemValue=""/>
+                                    <f:selectItems value="#{ventaFormBean.cargarButacas()}" var="butaca" itemLabel="#{butaca.cartelera.fecha}, #{butaca.cartelera.sala.nombre},
+                                                   #{butaca.cartelera.pelicula.nombre},#{butaca.identificadorButaca}" itemValue="#{butaca}"/>
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="txtPerfil" value="Perfil:"/>
+                                <p:selectOneMenu id="txtPerfil" converter="perfilConverter" value="#{ventaFormBean.ventaBean.venta.perfil}">
+                                    <f:selectItems value="#{perfilFormBean.obtenerPerfil()}" var="perfil" itemLabel="#{perfil.nombre}, #{perfil.apellido}"
+                                                   itemValue="#{perfil}"/>
+                                </p:selectOneMenu>
+                                
+                                <p:outputLabel for="txtDescripcion" value="Descripcion:"/>
+                                <p:inputText id="txtDescripcion" value="#{ventaFormBean.ventaBean.venta.descripcion}"/>
+                                
+                                <p:outputLabel for="txtPrecio" value="Precio:"/>
+                                <p:inputText id="txtPrecio" value="#{ventaFormBean.ventaBean.venta.precio}"/>
+                                
+                                <p:commandButton id="btnGuardarVenta" value="Aceptar" actionListener="#{ventaFormBean.realizarVenta(ventaFormBean.ventaBean.venta)}"
+                                                 update="grlCargaVenta, :frmVentas:tblVentas"/>
+                                <p:commandButton id="btnCancelGuardarVenta" value="Cancelar" oncomplete="PF('cargarVenta').hide()"/>
+                            </h:panelGrid>  
+                        </p:dialog>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

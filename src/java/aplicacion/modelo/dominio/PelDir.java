@@ -3,75 +3,76 @@ package aplicacion.modelo.dominio;
 import java.io.Serializable;
 
 public class PelDir implements Serializable {
-    private Integer pdCodigo;
-    private Director directores;
-    private Pelicula peliculas;
-    private boolean pdEstado;
+
+    private Integer codigo;
+    private Director director;
+    private Pelicula pelicula;
+    private boolean estado;
 
     public PelDir() {
     }
 
     public PelDir(Integer pdCodigo, Director directores, Pelicula peliculas, boolean pdEstado) {
-        this.pdCodigo = pdCodigo;
-        this.directores = directores;
-        this.peliculas = peliculas;
-        this.pdEstado = pdEstado;
+        this.codigo = pdCodigo;
+        this.director = directores;
+        this.pelicula = peliculas;
+        this.estado = pdEstado;
     }
 
     /**
-     * @return the pdCodigo
+     * @return the codigo
      */
-    public Integer getPdCodigo() {
-        return pdCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param pdCodigo the pdCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setPdCodigo(Integer pdCodigo) {
-        this.pdCodigo = pdCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the directores
+     * @return the director
      */
-    public Director getDirectores() {
-        return directores;
+    public Director getDirector() {
+        return director;
     }
 
     /**
-     * @param directores the directores to set
+     * @param director the director to set
      */
-    public void setDirectores(Director directores) {
-        this.directores = directores;
+    public void setDirector(Director director) {
+        this.director = director;
     }
 
     /**
-     * @return the peliculas
+     * @return the pelicula
      */
-    public Pelicula getPeliculas() {
-        return peliculas;
+    public Pelicula getPelicula() {
+        return pelicula;
     }
 
     /**
-     * @param peliculas the peliculas to set
+     * @param pelicula the pelicula to set
      */
-    public void setPeliculas(Pelicula peliculas) {
-        this.peliculas = peliculas;
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
 
     /**
-     * @return the pdEstado
+     * @return the estado
      */
-    public boolean isPdEstado() {
-        return pdEstado;
+    public boolean isEstado() {
+        return estado;
     }
 
     /**
-     * @param pdEstado the pdEstado to set
+     * @param estado the estado to set
      */
-    public void setPdEstado(boolean pdEstado) {
-        this.pdEstado = pdEstado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
 }

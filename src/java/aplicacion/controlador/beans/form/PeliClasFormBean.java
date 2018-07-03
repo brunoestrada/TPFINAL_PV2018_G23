@@ -1,33 +1,36 @@
 package aplicacion.controlador.beans.form;
 
-import aplicacion.controlador.beans.PeliculaBean;
-import aplicacion.modelo.dominio.Pelicula;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import aplicacion.hibernate.dao.IPeliculaDAO;
-import aplicacion.hibernate.dao.imp.PeliculaDAOImp;
+import aplicacion.controlador.beans.PeliClasBean;
+import aplicacion.hibernate.dao.imp.PeliculaClasificacionDAOImp;
+import aplicacion.modelo.dominio.PelCla;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
+import aplicacion.hibernate.dao.IPeliculaClasificacionDAO;
 
 @ManagedBean
 @ViewScoped
-public class PeliculaFormBean implements Serializable{
+public class PeliClasFormBean implements Serializable {
 
-    private PeliculaBean peliculaBean;
+    @ManagedProperty(value = "#{peliClasBean}")
+    private PeliClasBean peliClasBean;
 
-    public PeliculaFormBean() {
-        peliculaBean = new PeliculaBean();
+    public PeliClasFormBean() {
+        peliClasBean = new PeliClasBean();
     }
 
-    public void agregar(Pelicula pelicula) {
+    public void agregar(PelCla pelCla) {
         try {
-            IPeliculaDAO peliculaDAO = new PeliculaDAOImp();
-            peliculaBean.getPelicula().setCodigo(0);
-            peliculaBean.getPelicula().setEstado(true);
-            peliculaDAO.agregar(peliculaBean.getPelicula());
+            IPeliculaClasificacionDAO peliculaClasDAO = new PeliculaClasificacionDAOImp();
+            peliClasBean.getPelCla().getPelicula().setEstado(true);
+            peliClasBean.getPelCla().getClasificacion().setEstado(true);
+            peliClasBean.getPelCla().setEstado(true);
+            peliculaClasDAO.agregar(peliClasBean.getPelCla());
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Pelicula Agregada Exitosamente!", "Pelicula Agregada Exitosamente!");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
             RequestContext.getCurrentInstance().execute("PF('cargarPelicula').hide()");
@@ -37,10 +40,10 @@ public class PeliculaFormBean implements Serializable{
         }
     }
 
-    public void editar(Pelicula pelicula) {
+    public void editar(PelCla pelCla) {
         try {
-            IPeliculaDAO peliculaDAO = new PeliculaDAOImp();
-            peliculaDAO.editar(peliculaBean.getPelicula());
+            IPeliculaClasificacionDAO peliculaClasDAO = new PeliculaClasificacionDAOImp();
+            peliculaClasDAO.editar(peliClasBean.getPelCla());
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Pelicula editada exitosamente!", "Pelicula editada exitosamente!");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
             RequestContext.getCurrentInstance().execute("PF('editarPelicula').hide()");
@@ -50,11 +53,12 @@ public class PeliculaFormBean implements Serializable{
         }
     }
 
-    public void eliminar(Pelicula pelicula) {
+    public void eliminar(PelCla pelCla) {
         try {
-            IPeliculaDAO peliculaDAO = new PeliculaDAOImp();
-            peliculaBean.getPelicula().setEstado(false);
-            peliculaDAO.eliminar(peliculaBean.getPelicula());
+            IPeliculaClasificacionDAO peliculaClasDAO = new PeliculaClasificacionDAOImp();
+            peliClasBean.getPelCla().getPelicula().setEstado(false);
+            peliClasBean.getPelCla().setEstado(false);
+            peliculaClasDAO.eliminar(peliClasBean.getPelCla());
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Pelicula eliminada!", "Pelicula eliminada!");
             FacesContext.getCurrentInstance().addMessage(null, facesMessage);
             RequestContext.getCurrentInstance().execute("PF('eliminarPelicula').hide()");
@@ -64,25 +68,25 @@ public class PeliculaFormBean implements Serializable{
         }
     }
 
-    public List<Pelicula> cargarPeliculas() {
-        IPeliculaDAO peliculaDAO = new PeliculaDAOImp();
-        return peliculaDAO.obtenerPeliculas();
+    public List<PelCla> cargarPeliculas() {
+        IPeliculaClasificacionDAO peliculaClaDAO = new PeliculaClasificacionDAOImp();
+        return peliculaClaDAO.listaDePeliculas();
     }
 
-    public void establecerPelicula(Pelicula pelicula) {
-        peliculaBean.setPelicula(pelicula);
-    }
-    
-    public void limpiarCampos(){
-        peliculaBean = new PeliculaBean();
-    }
-    
-    public PeliculaBean getPeliculaBean() {
-        return peliculaBean;
+    public void establecerPelicula(PelCla pelCla) {
+        peliClasBean.setPelCla(pelCla);
     }
 
-    public void setPeliculaBean(PeliculaBean peliculaBean) {
-        this.peliculaBean = peliculaBean;
+    public void limpiarCampos() {
+        peliClasBean = new PeliClasBean();
+    }
+
+    public PeliClasBean getPeliClasBean() {
+        return peliClasBean;
+    }
+
+    public void setPeliClasBean(PeliClasBean peliClasBean) {
+        this.peliClasBean = peliClasBean;
     }
 
 }

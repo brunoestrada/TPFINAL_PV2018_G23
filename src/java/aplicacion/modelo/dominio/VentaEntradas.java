@@ -4,107 +4,107 @@ import java.io.Serializable;
 
 public class VentaEntradas implements Serializable {
 
-    private Integer venCodigo;
-    private ButacaCartelera butacasCarteleras;
-    private Perfil perfiles;
-    private String venPrecio;
-    private String venDescripcion;
-    private boolean venEstado;
+    private Integer codigo;
+    private ButacaCartelera butacaCartelera;
+    private Perfil perfil;
+    private String precio;
+    private String descripcion;
+    private boolean estado;
 
     public VentaEntradas() {
     }
 
     public VentaEntradas(Integer venCodigo, ButacaCartelera butacasCarteleras, Perfil perfiles, String venPrecio, String venDescripcion, boolean venEstado) {
-        this.venCodigo = venCodigo;
-        this.butacasCarteleras = butacasCarteleras;
-        this.perfiles = perfiles;
-        this.venPrecio = venPrecio;
-        this.venDescripcion = venDescripcion;
-        this.venEstado = venEstado;
+        this.codigo = venCodigo;
+        this.butacaCartelera = butacasCarteleras;
+        this.perfil = perfiles;
+        this.precio = venPrecio;
+        this.descripcion = venDescripcion;
+        this.estado = venEstado;
     }
 
     /**
-     * @return the venCodigo
+     * @return the codigo
      */
-    public Integer getVenCodigo() {
-        return venCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param venCodigo the venCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setVenCodigo(Integer venCodigo) {
-        this.venCodigo = venCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the butacasCarteleras
+     * @return the butacaCartelera
      */
-    public ButacaCartelera getButacasCarteleras() {
-        return butacasCarteleras;
+    public ButacaCartelera getButacaCartelera() {
+        return butacaCartelera;
     }
 
     /**
-     * @param butacasCarteleras the butacasCarteleras to set
+     * @param butacaCartelera the butacaCartelera to set
      */
-    public void setButacasCarteleras(ButacaCartelera butacasCarteleras) {
-        this.butacasCarteleras = butacasCarteleras;
+    public void setButacaCartelera(ButacaCartelera butacaCartelera) {
+        this.butacaCartelera = butacaCartelera;
     }
 
     /**
-     * @return the perfiles
+     * @return the perfil
      */
-    public Perfil getPerfiles() {
-        return perfiles;
+    public Perfil getPerfil() {
+        return perfil;
     }
 
     /**
-     * @param perfiles the perfiles to set
+     * @param perfil the perfil to set
      */
-    public void setPerfiles(Perfil perfiles) {
-        this.perfiles = perfiles;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     /**
-     * @return the venPrecio
+     * @return the precio
      */
-    public String getVenPrecio() {
-        return venPrecio;
+    public String getPrecio() {
+        return precio;
     }
 
     /**
-     * @param venPrecio the venPrecio to set
+     * @param precio the precio to set
      */
-    public void setVenPrecio(String venPrecio) {
-        this.venPrecio = venPrecio;
+    public void setPrecio(String precio) {
+        this.precio = precio;
     }
 
     /**
-     * @return the venDescripcion
+     * @return the descripcion
      */
-    public String getVenDescripcion() {
-        return venDescripcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
-     * @param venDescripcion the venDescripcion to set
+     * @param descripcion the descripcion to set
      */
-    public void setVenDescripcion(String venDescripcion) {
-        this.venDescripcion = venDescripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     /**
-     * @return the venEstado
+     * @return the estado
      */
-    public boolean isVenEstado() {
-        return venEstado;
+    public boolean isEstado() {
+        return estado;
     }
 
     /**
-     * @param venEstado the venEstado to set
+     * @param estado the estado to set
      */
-    public void setVenEstado(boolean venEstado) {
-        this.venEstado = venEstado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
 }

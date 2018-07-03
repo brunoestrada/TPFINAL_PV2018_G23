@@ -6,7 +6,7 @@
       <column name="per_codigo"/>
       <generator class="increment"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Usuario" fetch="join" name="usuario">
+    <many-to-one class="aplicacion.modelo.dominio.Usuario" fetch="join" cascade="all" name="usuario">
       <column name="per_usuario"/>
     </many-to-one>
     <property name="nombre" type="string">

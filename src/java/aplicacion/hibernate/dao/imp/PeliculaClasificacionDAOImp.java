@@ -1,49 +1,49 @@
 package aplicacion.hibernate.dao.imp;
 
 import aplicacion.datos.hibernate.configuracion.HibernateUtil;
-import aplicacion.modelo.dominio.Pelicula;
+import aplicacion.modelo.dominio.PelCla;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import aplicacion.hibernate.dao.IPeliculaDAO;
+import aplicacion.hibernate.dao.IPeliculaClasificacionDAO;
 
-public class PeliculaDAOImp implements IPeliculaDAO {
+public class PeliculaClasificacionDAOImp implements IPeliculaClasificacionDAO {
 
     @Override
-    public void agregar(Pelicula pelicula) {
+    public void agregar(PelCla peliculaClas) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.save(pelicula);
+        session.save(peliculaClas);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void editar(Pelicula pelicula) {
+    public void editar(PelCla peliculaClas) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.update(pelicula);
+        session.update(peliculaClas);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void eliminar(Pelicula pelicula) {
+    public void eliminar(PelCla peliculaClas) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.update(pelicula);
+        session.update(peliculaClas);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<Pelicula> obtenerPeliculas() {
+    public List<PelCla> listaDePeliculas() {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
-        Criteria criteria = session.createCriteria(Pelicula.class);
+        Criteria criteria = session.createCriteria(PelCla.class);
         criteria.add(Restrictions.eq("estado", true));
-        criteria.addOrder(Order.asc("nombre"));
+        criteria.addOrder(Order.asc("codigo"));
         List peliculas = criteria.list();
         return peliculas;
     }

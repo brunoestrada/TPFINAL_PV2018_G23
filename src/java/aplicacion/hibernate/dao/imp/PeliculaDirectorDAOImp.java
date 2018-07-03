@@ -1,51 +1,62 @@
 package aplicacion.hibernate.dao.imp;
 
 import aplicacion.datos.hibernate.configuracion.HibernateUtil;
-import aplicacion.modelo.dominio.Director;
+import aplicacion.hibernate.dao.IPeliculaDirectorDAO;
+import aplicacion.modelo.dominio.PelDir;
+import aplicacion.modelo.dominio.Pelicula;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import aplicacion.hibernate.dao.IDirectorDAO;
 
-public class DirectorDAOImp implements IDirectorDAO {
+public class PeliculaDirectorDAOImp implements IPeliculaDirectorDAO {
 
     @Override
-    public void agregar(Director director) {
+    public void agregar(PelDir pelDir) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.save(director);
+        session.save(pelDir);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void editar(Director director) {
+    public void editar(PelDir pelDir) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.update(director);
+        session.update(pelDir);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void eliminar(Director director) {
+    public void eliminar(PelDir pelDir) {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         session.beginTransaction();
-        session.update(director);
+        session.update(pelDir);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public List<Director> obtenerDirectores() {
+    public List<PelDir> listaDePeliculas() {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
-        Criteria criteria = session.createCriteria(Director.class);
+        Criteria criteria = session.createCriteria(PelDir.class);
+        criteria.add(Restrictions.eq("estado", true));
+        criteria.addOrder(Order.asc("codigo"));
+        List peliculas = criteria.list();
+        return peliculas;
+    }
+    
+    @Override
+    public List<Pelicula> peliculas() {
+        Session session = HibernateUtil.getSESSION_FACTORY().openSession();
+        Criteria criteria = session.createCriteria(Pelicula.class);
         criteria.add(Restrictions.eq("estado", true));
         criteria.addOrder(Order.asc("nombre"));
-        List directores = criteria.list();
-        return directores;
+        List peliculas = criteria.list();
+        return peliculas;
     }
 
 }

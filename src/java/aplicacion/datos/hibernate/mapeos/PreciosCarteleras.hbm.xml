@@ -1,21 +1,20 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 09/06/2018 00:06:25 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="aplicacion.modelo.dominio.PrecioCartelera" table="precios_carteleras" catalog="cine" optimistic-lock="version">
-        <id name="preCodigo" type="java.lang.Integer">
-            <column name="pre_codigo" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="carteleras" class="aplicacion.modelo.dominio.Cartelera" fetch="join">
-            <column name="pre_cartelera" not-null="true" />
-        </many-to-one>
-        <property name="preDescripcion" type="string">
-            <column name="pre_descripcion" length="100" not-null="true" />
-        </property>
-        <property name="prePrecio" type="double">
-            <column name="pre_precio" precision="22" scale="0" not-null="true" />
-        </property>
-    </class>
+  <class catalog="cine" name="aplicacion.modelo.dominio.PrecioCartelera" optimistic-lock="version" table="precios_carteleras">
+    <id name="codigo" type="java.lang.Integer">
+      <column name="pre_codigo"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="aplicacion.modelo.dominio.Cartelera" fetch="join" name="cartelera">
+      <column name="pre_cartelera" not-null="true"/>
+    </many-to-one>
+    <property name="descripcion" type="string">
+      <column length="100" name="pre_descripcion" not-null="true"/>
+    </property>
+    <property name="precio" type="double">
+      <column name="pre_precio" not-null="true" precision="22" scale="0"/>
+    </property>
+  </class>
 </hibernate-mapping>

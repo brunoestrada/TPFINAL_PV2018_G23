@@ -1,31 +1,28 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 09/06/2018 00:06:25 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="aplicacion.modelo.dominio.Cartelera" table="carteleras" catalog="cine" optimistic-lock="version">
-        <id name="carCodigo" type="java.lang.Integer">
-            <column name="car_codigo" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="peliculas" class="aplicacion.modelo.dominio.Pelicula" fetch="join">
-            <column name="car_pelicula" not-null="true" />
-        </many-to-one>
-        <many-to-one name="salas" class="aplicacion.modelo.dominio.Sala" fetch="join">
-            <column name="car_sala" not-null="true" />
-        </many-to-one>
-        <property name="carFecha" type="date">
-            <column name="car_fecha" length="10" not-null="true" />
-        </property>
-        <property name="carHorario" type="string">
-            <column name="car_horario" length="45" not-null="true" />
-        </property>
-        <property name="carPrecio" type="double">
-            <column name="car_precio" precision="22" scale="0" not-null="true" />
-        </property>
-        <property name="carEstado" type="boolean">
-            <column name="car_estado" not-null="true" />
-        </property>
-       
-    </class>
+  <class catalog="cine" name="aplicacion.modelo.dominio.Cartelera" optimistic-lock="version" table="carteleras">
+    <id name="codigo" type="java.lang.Integer">
+      <column name="car_codigo"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one cascade="all" class="aplicacion.modelo.dominio.Pelicula" fetch="join" name="pelicula">
+      <column name="car_pelicula" not-null="true"/>
+    </many-to-one>
+    <many-to-one cascade="all" class="aplicacion.modelo.dominio.Sala" fetch="join" name="sala">
+      <column name="car_sala" not-null="true"/>
+    </many-to-one>
+    <property name="fecha" type="date">
+      <column length="10" name="car_fecha" not-null="true"/>
+    </property>
+    <property name="horario" type="string">
+      <column length="45" name="car_horario" not-null="true"/>
+    </property>
+    <property name="precio" type="double">
+      <column name="car_precio" not-null="true" precision="22" scale="0"/>
+    </property>
+    <property name="estado" type="boolean">
+      <column name="car_estado" not-null="true"/>
+    </property>
+  </class>
 </hibernate-mapping>

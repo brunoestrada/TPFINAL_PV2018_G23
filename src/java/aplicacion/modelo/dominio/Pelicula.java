@@ -1,6 +1,9 @@
 package aplicacion.modelo.dominio;
 
-public class Pelicula {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Pelicula implements Serializable {
 
     private Integer codigo;
     private String nombre;
@@ -71,6 +74,36 @@ public class Pelicula {
      */
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.codigo;
+        hash = 61 * hash + Objects.hashCode(this.nombre);
+        hash = 61 * hash + Objects.hashCode(this.descripcion);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pelicula other = (Pelicula) obj;
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        return true;
     }
 
 }

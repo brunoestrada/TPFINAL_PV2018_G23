@@ -2,7 +2,7 @@ package aplicacion.hibernate.dao;
 
 import aplicacion.modelo.dominio.Usuario;
 
-public interface IUsuarioDAO {
+public interface ILoginDAO {
 
     /**
      * Valida la existencia de un usuario
@@ -12,11 +12,5 @@ public interface IUsuarioDAO {
      * @return null si no existe
      */
     Usuario validarUsuario(String nombreUsuario, String password);
-
-    public void agregar(Usuario usuario);
-
-    public void editar(Usuario usuario);
-
-    public void eliminar(Usuario usuario);
 
 }

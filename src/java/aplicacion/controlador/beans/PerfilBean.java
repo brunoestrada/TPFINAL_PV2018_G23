@@ -1,6 +1,7 @@
 package aplicacion.controlador.beans;
 
 import aplicacion.modelo.dominio.Perfil;
+import aplicacion.modelo.dominio.Usuario;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
@@ -14,6 +15,7 @@ public class PerfilBean implements Serializable{
 
     public PerfilBean() {
         perfil = new Perfil();
+        perfil.setUsuario(new Usuario());
     }
 
     public Perfil getPerfil() {

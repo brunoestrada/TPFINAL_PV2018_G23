@@ -27,7 +27,6 @@ public class ClasificacionFormBean implements Serializable {
     public void agregar(Clasificacion clasificacion) {
         try {
             IClasificacionDAO clasificacionDAO = new ClasificacionDAOImp();
-            clasificacionBean.getClasificacion().setCodigo(0);
             clasificacionBean.getClasificacion().setEstado(true);
             clasificacionDAO.agregar(clasificacionBean.getClasificacion());
             FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Clasificacion Agregada Exitosamente!", "Clasificacion Agregada Exitosamente!");

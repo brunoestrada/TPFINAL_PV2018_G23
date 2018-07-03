@@ -1,12 +1,12 @@
 package aplicacion.controlador.beans.form;
 
-import aplicacion.hibernate.dao.IUsuarioDAO;
-import aplicacion.hibernate.dao.imp.UsuarioDAOImp;
+import aplicacion.hibernate.dao.imp.LoginDAOImp;
 import aplicacion.modelo.dominio.Usuario;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import aplicacion.hibernate.dao.ILoginDAO;
 
 @ManagedBean
 @RequestScoped
@@ -20,7 +20,7 @@ public class LoginFormBean {
 
     public String validarUsuario() {
         String resultado = null;
-        IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
+        ILoginDAO usuarioDAO = new LoginDAOImp();
         Usuario usuario = usuarioDAO.validarUsuario(nombreUsuario, password);
         if (usuario != null) {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioValidado", usuario);

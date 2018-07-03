@@ -1,94 +1,130 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ButacaCartelera implements Serializable {
 
-    private Integer bcCodigo;
-    private Cartelera carteleras;
-    private String bcIdentificadorButaca;
-    private boolean bcDisponible;
-    private boolean bcEstado;
+    private Integer codigo;
+    private Cartelera cartelera;
+    private String identificadorButaca;
+    private boolean disponible;
+    private boolean estado;
 
     public ButacaCartelera() {
     }
 
     public ButacaCartelera(Integer bcCodigo, Cartelera carteleras, String bcIdentificadorButaca, boolean bcDisponible, boolean bcEstado) {
-        this.bcCodigo = bcCodigo;
-        this.carteleras = carteleras;
-        this.bcIdentificadorButaca = bcIdentificadorButaca;
-        this.bcDisponible = bcDisponible;
-        this.bcEstado = bcEstado;
+        this.codigo = bcCodigo;
+        this.cartelera = carteleras;
+        this.identificadorButaca = bcIdentificadorButaca;
+        this.disponible = bcDisponible;
+        this.estado = bcEstado;
     }
 
     /**
-     * @return the bcCodigo
+     * @return the codigo
      */
-    public Integer getBcCodigo() {
-        return bcCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param bcCodigo the bcCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setBcCodigo(Integer bcCodigo) {
-        this.bcCodigo = bcCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the carteleras
+     * @return the cartelera
      */
-    public Cartelera getCarteleras() {
-        return carteleras;
+    public Cartelera getCartelera() {
+        return cartelera;
     }
 
     /**
-     * @param carteleras the carteleras to set
+     * @param cartelera the cartelera to set
      */
-    public void setCarteleras(Cartelera carteleras) {
-        this.carteleras = carteleras;
+    public void setCartelera(Cartelera cartelera) {
+        this.cartelera = cartelera;
     }
 
     /**
-     * @return the bcIdentificadorButaca
+     * @return the identificadorButaca
      */
-    public String getBcIdentificadorButaca() {
-        return bcIdentificadorButaca;
+    public String getIdentificadorButaca() {
+        return identificadorButaca;
     }
 
     /**
-     * @param bcIdentificadorButaca the bcIdentificadorButaca to set
+     * @param identificadorButaca the identificadorButaca to set
      */
-    public void setBcIdentificadorButaca(String bcIdentificadorButaca) {
-        this.bcIdentificadorButaca = bcIdentificadorButaca;
+    public void setIdentificadorButaca(String identificadorButaca) {
+        this.identificadorButaca = identificadorButaca;
     }
 
     /**
-     * @return the bcDisponible
+     * @return the disponible
      */
-    public boolean isBcDisponible() {
-        return bcDisponible;
+    public boolean isDisponible() {
+        return disponible;
     }
 
     /**
-     * @param bcDisponible the bcDisponible to set
+     * @param disponible the disponible to set
      */
-    public void setBcDisponible(boolean bcDisponible) {
-        this.bcDisponible = bcDisponible;
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
     /**
-     * @return the bcEstado
+     * @return the estado
      */
-    public boolean isBcEstado() {
-        return bcEstado;
+    public boolean isEstado() {
+        return estado;
     }
 
     /**
-     * @param bcEstado the bcEstado to set
+     * @param estado the estado to set
      */
-    public void setBcEstado(boolean bcEstado) {
-        this.bcEstado = bcEstado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.codigo;
+        hash = 61 * hash + Objects.hashCode(this.cartelera);
+        hash = 61 * hash + Objects.hashCode(this.identificadorButaca);
+        hash = 61 * hash + Objects.hashCode(this.disponible);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ButacaCartelera other = (ButacaCartelera) obj;
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.cartelera, other.cartelera)) {
+            return false;
+        }
+        if (!Objects.equals(this.identificadorButaca, other.identificadorButaca)) {
+            return false;
+        }
+        if (!Objects.equals(this.disponible, other.disponible)) {
+            return false;
+        }
+        return true;
+    }
+    
 
 }

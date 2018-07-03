@@ -15,7 +15,7 @@
                     <h:form id="frmPerfilUsuario" rendered="#{usuarioControlFormBean.verificarSesion()}">
                         <p:panel header="Usuarios">
                             <p:dataTable id="tblPerfilUsuario" value="#{perfilFormBean.cargarTabla()}" var="per" rows="6" paginator="true">
-                                <p:column headerText="Nombre Usuario" style="text-align: center">
+                                <p:column headerText="Usuario" style="text-align: center">
                                     <p:outputLabel value="#{per.usuario.nombreUsuario}"/>   
                                 </p:column>
 
@@ -47,9 +47,9 @@
 
                                 <p:column headerText="Acciones" style="text-align: center">
                                     <p:commandButton icon="ui-icon-pencil" oncomplete="PF('editarPerfilUsuario').show()" update=":frmEditarPerfil"
-                                                     actionListener="#{perfilFormBean.establecerPerfil(per, per.usuario)}"/>
+                                                     actionListener="#{perfilFormBean.establecerPerfil(per)}"/>
                                     <p:commandButton icon="ui-icon-trash" oncomplete="PF('eliminarPerfilUsuario').show()"
-                                                     actionListener="#{perfilFormBean.establecerPerfil(per, per.usuario)}" update=":frmEliminarPerfil"/>
+                                                     actionListener="#{perfilFormBean.establecerPerfil(per)}" update=":frmEliminarPerfil"/>
                                 </p:column>
 
                             </p:dataTable>
@@ -64,10 +64,10 @@
                         <p:dialog widgetVar="cargarPerfilUsuario" modal="true" header="Crear nuevo perfil" showEffect="explode" hideEffect="explode" resizable="false">
                             <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid">
                                 <p:outputLabel for="txtNombre" value="Nombre de usuario:"/>
-                                <p:inputText id="txtNombre" required="true" requiredMessage="Ingrese Nombre de Usuario" value="#{perfilFormBean.usuarioBean.usuario.nombreUsuario}"/>
+                                <p:inputText id="txtNombre" required="true" requiredMessage="Ingrese Nombre de Usuario" value="#{perfilFormBean.perfilBean.perfil.usuario.nombreUsuario}"/>
 
                                 <p:outputLabel for="txtPassword" value="Password:"/>
-                                <p:password id="txtPassword" maxlength="8" requiredMessage="Ingrese Password" required="true" value="#{perfilFormBean.usuarioBean.usuario.password}"/>
+                                <p:password id="txtPassword" maxlength="8" requiredMessage="Ingrese Password" required="true" value="#{perfilFormBean.perfilBean.perfil.usuario.password}"/>
 
                                 <p:outputLabel for="txtNombrePerfil" value="Nombre Perfil:"/>
                                 <p:inputText id="txtNombrePerfil" required="true" requiredMessage="Ingrese Nombre" value="#{perfilFormBean.perfilBean.perfil.nombre}"/>
@@ -101,49 +101,46 @@
 
                     <h:form id="frmEditarPerfil">
                         <p:growl id="grlMensajesEditar" showDetail="false" sticky="false"/>
-                        <p:dialog widgetVar="editarPerfilUsuario" modal="true">
-                            <p:panel header="Perfil Usuario" footer="Sistema de Cine - 2018" style="width:600px;" >
-                                <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid">
-                                    <p:outputLabel for="txtNombre" value="Nombre de usuario:"/>
-                                    <p:inputText id="txtNombre" required="true" requiredMessage="Complete Nombre de Usuario" value="#{perfilFormBean.usuarioBean.usuario.nombreUsuario}"/>
+                        <p:dialog header="Editar Perfil" widgetVar="editarPerfilUsuario" modal="true">
+                            <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid">
+                                <p:outputLabel for="txtNombre" value="Nombre de usuario:"/>
+                                <p:inputText id="txtNombre" required="true" requiredMessage="Complete Nombre de Usuario" value="#{perfilFormBean.perfilBean.perfil.usuario.nombreUsuario}"/>
 
-                                    <p:outputLabel for="txtPassword" value="Password:"/>
-                                    <p:inputText id="txtPassword" maxlength="8" requiredMessage="Complete Password" required="true" value="#{perfilFormBean.usuarioBean.usuario.password}"/>
+                                <p:outputLabel for="txtPassword" value="Password:"/>
+                                <p:inputText id="txtPassword" maxlength="8" requiredMessage="Complete Password" required="true" value="#{perfilFormBean.perfilBean.perfil.usuario.password}"/>
 
-                                    <p:outputLabel for="txtNombrePerfil" value="Nombre Perfil:"/>
-                                    <p:inputText id="txtNombrePerfil" required="true" requiredMessage="Complete Nombre" value="#{perfilFormBean.perfilBean.perfil.nombre}"/>
+                                <p:outputLabel for="txtNombrePerfil" value="Nombre Perfil:"/>
+                                <p:inputText id="txtNombrePerfil" required="true" requiredMessage="Complete Nombre" value="#{perfilFormBean.perfilBean.perfil.nombre}"/>
 
-                                    <p:outputLabel for="txtApellidoPerfil" value="Apellido Perfil:"/>
-                                    <p:inputText id="txtApellidoPerfil" required="true" requiredMessage="Complete Apellido" value="#{perfilFormBean.perfilBean.perfil.apellido}"/>
+                                <p:outputLabel for="txtApellidoPerfil" value="Apellido Perfil:"/>
+                                <p:inputText id="txtApellidoPerfil" required="true" requiredMessage="Complete Apellido" value="#{perfilFormBean.perfilBean.perfil.apellido}"/>
 
-                                    <p:outputLabel for="txtDniPerfil" value="DNI Perfil:"/>
-                                    <p:inputMask id="txtDniPerfil" mask="99999999" required="true" requiredMessage="Complete DNI" value="#{perfilFormBean.perfilBean.perfil.dni}"/>
+                                <p:outputLabel for="txtDniPerfil" value="DNI Perfil:"/>
+                                <p:inputMask id="txtDniPerfil" mask="99999999" required="true" requiredMessage="Complete DNI" value="#{perfilFormBean.perfilBean.perfil.dni}"/>
 
-                                    <p:outputLabel for="txtFechaNac" value="FechaNac Perfil:"/>
-                                    <p:calendar id="txtFechaNac" pattern="dd-MM-yyyy" required="true" mask="true" requiredMessage="Complete Fecha de Nacimiento"
-                                                size="10" maxlength="10" locale="es" maxdate="#{perfilFormBean.fechaActual}" value="#{perfilFormBean.perfilBean.perfil.fechaNac}"/>
+                                <p:outputLabel for="txtFechaNac" value="FechaNac Perfil:"/>
+                                <p:calendar id="txtFechaNac" pattern="dd-MM-yyyy" required="true" mask="true" requiredMessage="Complete Fecha de Nacimiento"
+                                            size="10" maxlength="10" locale="es" maxdate="#{perfilFormBean.fechaActual}" value="#{perfilFormBean.perfilBean.perfil.fechaNac}"/>
 
-                                    <p:outputLabel for="txtEmailPerfil" value="Email Perfil:"/>
-                                    <p:inputText id="txtEmailPerfil" required="true" requiredMessage="Complete Email" validatorMessage="Ingrese un email valido"
-                                                 value="#{perfilFormBean.perfilBean.perfil.email}">
-                                        <f:validator validatorId="emailValidator"/>
-                                    </p:inputText>
+                                <p:outputLabel for="txtEmailPerfil" value="Email Perfil:"/>
+                                <p:inputText id="txtEmailPerfil" required="true" requiredMessage="Complete Email" validatorMessage="Ingrese un email valido"
+                                             value="#{perfilFormBean.perfilBean.perfil.email}">
+                                    <f:validator validatorId="emailValidator"/>
+                                </p:inputText>
 
-                                    <p:outputLabel for="txtDireccionPerfil" value="Direccion Perfil:"/>
-                                    <p:inputText id="txtDireccionPerfil" required="true" requiredMessage="Complete Dirección" value="#{perfilFormBean.perfilBean.perfil.direccion}"/>
+                                <p:outputLabel for="txtDireccionPerfil" value="Direccion Perfil:"/>
+                                <p:inputText id="txtDireccionPerfil" required="true" requiredMessage="Complete Dirección" value="#{perfilFormBean.perfilBean.perfil.direccion}"/>
 
-                                    <p:commandButton id="btnGuardarPerfil" value="Guardar Perfil" update="grlMensajesEditar, :frmPerfilUsuario:tblPerfilUsuario"
-                                                     actionListener="#{perfilFormBean.editarPerfil(perfilFormBean.perfilBean.perfil)}"/>
+                                <p:commandButton id="btnGuardarPerfil" value="Guardar Perfil" update="grlMensajesEditar, :frmPerfilUsuario:tblPerfilUsuario"
+                                                 actionListener="#{perfilFormBean.editarPerfil(perfilFormBean.perfilBean.perfil)}"/>
 
-                                    <p:commandButton id="btnCancelarGuardarPerfil" value="Cancelar" actionListener="#{perfilFormBean.limpiarCampos()}"
-                                                     oncomplete="PF('editarPerfilUsuario').hide()" update="frmEditarPerfil"/>
-                                </h:panelGrid>
-                            </p:panel> 
+                                <p:commandButton id="btnCancelarGuardarPerfil" value="Cancelar" actionListener="#{perfilFormBean.limpiarCampos()}"
+                                                 oncomplete="PF('editarPerfilUsuario').hide()" update="frmEditarPerfil"/>
+                            </h:panelGrid>
                         </p:dialog>
                     </h:form>
-
                     <h:form id="frmEliminarPerfil">
-                        <p:confirmDialog widgetVar="eliminarPerfilUsuario" header="Eliminar"
+                        <p:confirmDialog widgetVar="eliminarPerfilUsuario" header="Eliminar Perfil"
                                          message="¿Desea eliminar este item?" showEffect="explode" hideEffect="explode">
                             <h:panelGrid columns="3" cellpadding="5" style="text-align: center">
                                 <p:outputLabel value="Perfil: "/>

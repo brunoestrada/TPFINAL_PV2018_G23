@@ -43,7 +43,7 @@ public class ClasificacionDAOImp implements IClasificacionDAO {
         Session session = HibernateUtil.getSESSION_FACTORY().openSession();
         Criteria criteria = session.createCriteria(Clasificacion.class);
         criteria.add(Restrictions.eq("estado", true));
-        criteria.addOrder(Order.asc("descripcion"));
+        criteria.addOrder(Order.asc("codigo"));
         List peliculas = criteria.list();
         return peliculas;
     }

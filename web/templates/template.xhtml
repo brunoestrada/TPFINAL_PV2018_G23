@@ -18,74 +18,67 @@
     </h:head>
 
     <h:body>
-        <f:view locale="en">
         <div id="contenedor">
             <div class="top">
                 <ui:insert name="top">
                     <div id="tooplate_header">
-                        <p:outputLabel id="titulo" value="#{msg['template.titulo']}"/>
+                        <p:outputLabel id="titulo" value="CINE UNJU"/>
                     </div>
                     <div id="tooplate_middle"  >
                         <h:form rendered="#{usuarioControlFormBean.verificarSesion()}">
-                            <p:menubar>
+                            <p:menubar>  
+                                <p:submenu label="Ventas" icon="ui-icon-contact">
+                                    <p:menuitem value="ventas" outcome="/ventas/ventas"/>
+                                </p:submenu>
                                 
-                                <p:submenu label="#{msg['template.menuVentas']}" icon="ui-icon-contact">
+                                <p:submenu label="Cartelera" icon="ui-icon-document">
+                                    <p:menuitem value="Cartelera" outcome="/cartelera/cartelera" />
+                                </p:submenu>
 
-                                </p:submenu>
-                                <p:submenu label="#{msg['template.menuCartelera']}" icon="ui-icon-document">
-                                    <p:submenu label="#{msg['template.menuCartelera']}">
-                                        <p:menuitem value="#{msg['template.menuCartelera']}" outcome="/administracion/altaCartelera" />
+                                <p:submenu label="Administrar" icon="ui-icon-contact" rendered="#{usuarioControlFormBean.verificarSesionUF() eq false}">
+                                    <p:submenu label="Usuarios" >
+                                        <p:menuitem value="ABM Perfiles" outcome="/administracion/altaPerfilUsuario"/>
+                                        <p:menuitem value="Reportes"/>
+                                    </p:submenu>
+
+                                    <p:submenu label="Peliculas" >
+                                        <p:menuitem value="ABM Peliculas" outcome="/administracion/altaPelicula"/>
+                                        <p:menuitem value="Reportes"/>
+                                    </p:submenu>
+                                    
+                                    <p:submenu label="Cartelera" >
+                                        <p:menuitem value="ABM Carteleras" outcome="/administracion/altaCartelera" />
+                                        <p:menuitem value="Reportes"/>
+                                    </p:submenu>
+
+                                    <p:submenu label="Directores" >
+                                        <p:menuitem value="ABM Directores" outcome="/administracion/altaDirector"/>
+                                        <p:menuitem value="Reportes"/>
+                                    </p:submenu>
+
+                                    <p:submenu label="Clasificaciones" >
+                                        <p:menuitem value="ABM Clasificaciones" outcome="/administracion/altaClasificacion"/>
+                                        <p:menuitem value="Reportes"/>
+                                    </p:submenu>
+                                    
+                                    <p:submenu label="Salas" >
+                                        <p:menuitem value="ABM Salas" outcome="/administracion/altaSalas"/>
+                                        <p:menuitem value="Reportes"/>
                                     </p:submenu>
                                 </p:submenu>
-                                <p:submenu label="#{msg['template.menuAdmin']}" icon="ui-icon-contact" rendered="#{usuarioControlFormBean.verificarSesionUF() eq false}">
-                                    <p:submenu label="#{msg['template.menuAdmin.Usuario']}" >
-                                        <p:menuitem value="#{msg['template.menuAdmin.UsuarioABM']}" outcome="/administracion/perfilUsuario">
-                                        </p:menuitem>
-                                        <p:menuitem value="#{msg['template.menuAdmin.UsuarioRep']}"
-                                                    >
-                                        </p:menuitem>
-                                    </p:submenu>
-                                    <p:submenu label="#{msg['template.menuAdmin.Pelicula']}" >
-                                        <p:menuitem value="#{msg['template.menuAdmin.PeliculaABM']}"
-                                                    outcome="/administracion/altaPelicula">
-                                        </p:menuitem>
-                                        
-                                        <p:menuitem value="#{msg['template.menuAdmin.PeliculaRep']}">
-                                        </p:menuitem>
-                                    </p:submenu>
-                                    <p:submenu label="#{msg['template.menuAdmin.Director']}" >
-                                        <p:menuitem value="#{msg['template.menuAdmin.DirectorABM']}" outcome="/administracion/altaDirector">
-                                        </p:menuitem>
-                                        
-                                        <p:menuitem value="#{msg['template.menuAdmin.DirectorRep']}">
-                                        </p:menuitem>
-                                    </p:submenu>
-                                    <p:submenu label="#{msg['template.menuAdmin.Actor']}" >
-                                        <p:menuitem value="#{msg['template.menuAdmin.ActorABM']}" outcome="/administracion/altaActor" >
-                                        </p:menuitem>
-                                        
-                                        <p:menuitem value="#{msg['template.menuAdmin.ActorRep']}">
-                                        </p:menuitem>
-                                    </p:submenu>
-                                    <p:submenu label="#{msg['template.menuAdmin.Clasificacion']}" >
-                                        <p:menuitem value="#{msg['template.menuAdmin.ClasificacionABM']}" outcome="/administracion/altaClasificacion">
-                                        </p:menuitem>
-                                        
-                                        <p:menuitem value="#{msg['template.menuAdmin.ClasificacionRep']}">
-                                        </p:menuitem>
-                                    </p:submenu>
-                                </p:submenu>
-                                <p:menuitem icon="ui-icon-back" value="#{msg['template.menuVovler']}" outcome="/menu/menu"/>
+
+                                <p:menuitem icon="ui-icon-back" value="Volver" outcome="/menu/menu"/>
+
                                 <f:facet name="options">
-                                    <p:outputLabel value="#{msg['template.menuBienVenido']} #{usuarioControlFormBean.mostrarNombreUsuario()} "/>
-                                    <p:commandButton value="#{msg['template.menuCerrar']}" action="#{usuarioControlFormBean.cerrarSesion()}"/>
+                                    <p:outputLabel value="Bienvenido #{usuarioControlFormBean.mostrarNombreUsuario()} "/>
+                                    <p:commandButton value="Cerrar Sesion" action="#{usuarioControlFormBean.cerrarSesion()}"/>
                                 </f:facet>
                             </p:menubar>
                         </h:form>
                         <p:panel rendered="#{usuarioControlFormBean.verificarSesion() eq false}">
                             <h:form>
-                                <p:outputLabel value="#{msg['template.noSesion']}"/>
-                                <p:commandButton value="#{msg['template.iniciarSesion']}" action="/index?faces-redirect=true"/>
+                                <p:outputLabel value="Sesion no iniciada "/>
+                                <p:commandButton value="Iniciar Sesion" action="/index?faces-redirect=true"/>
                             </h:form>
                         </p:panel>
                     </div>
@@ -100,11 +93,10 @@
                 <ui:insert name="bottom">
                     <div id="tooplate_footer" style="text-align: center">
                         <hr/>
-                        <p:outputLabel value="#{msg['template.footer']}"/>
+                        <p:outputLabel value="Desarrollado por Catedra Programacion Visual - Universidad Nacional de Jujuy"/>
                     </div>
                 </ui:insert>
             </div>
         </div>
-            </f:view>
     </h:body>
 </html>

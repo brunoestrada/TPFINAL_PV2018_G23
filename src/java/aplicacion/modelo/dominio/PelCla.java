@@ -5,75 +5,75 @@ import java.io.Serializable;
 
 public class PelCla implements Serializable{
 
-    private Integer pcCodigo;
-    private Clasificacion clasificaciones;
-    private Pelicula peliculas;
-    private boolean pcEstado;
+    private Integer codigo;
+    private Clasificacion clasificacion;
+    private Pelicula pelicula;
+    private boolean estado;
 
     public PelCla() {
     }
 
     public PelCla(Integer pcCodigo, Clasificacion clasificaciones, Pelicula peliculas, boolean pcEstado) {
-        this.pcCodigo = pcCodigo;
-        this.clasificaciones = clasificaciones;
-        this.peliculas = peliculas;
-        this.pcEstado = pcEstado;
+        this.codigo = pcCodigo;
+        this.clasificacion = clasificaciones;
+        this.pelicula = peliculas;
+        this.estado = pcEstado;
     }
 
     /**
-     * @return the pcCodigo
+     * @return the codigo
      */
-    public Integer getPcCodigo() {
-        return pcCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param pcCodigo the pcCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setPcCodigo(Integer pcCodigo) {
-        this.pcCodigo = pcCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the clasificaciones
+     * @return the clasificacion
      */
-    public Clasificacion getClasificaciones() {
-        return clasificaciones;
+    public Clasificacion getClasificacion() {
+        return clasificacion;
     }
 
     /**
-     * @param clasificaciones the clasificaciones to set
+     * @param clasificacion the clasificacion to set
      */
-    public void setClasificaciones(Clasificacion clasificaciones) {
-        this.clasificaciones = clasificaciones;
+    public void setClasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
     }
 
     /**
-     * @return the peliculas
+     * @return the pelicula
      */
-    public Pelicula getPeliculas() {
-        return peliculas;
+    public Pelicula getPelicula() {
+        return pelicula;
     }
 
     /**
-     * @param peliculas the peliculas to set
+     * @param pelicula the pelicula to set
      */
-    public void setPeliculas(Pelicula peliculas) {
-        this.peliculas = peliculas;
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
 
     /**
-     * @return the pcEstado
+     * @return the estado
      */
-    public boolean isPcEstado() {
-        return pcEstado;
+    public boolean isEstado() {
+        return estado;
     }
 
     /**
-     * @param pcEstado the pcEstado to set
+     * @param estado the estado to set
      */
-    public void setPcEstado(boolean pcEstado) {
-        this.pcEstado = pcEstado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     

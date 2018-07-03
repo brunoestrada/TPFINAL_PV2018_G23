@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-  <class catalog="cine" name="aplicacion.modelo.dominio.Pelicula" optimistic-lock="version" table="peliculas">
-    <id name="codigo" type="java.lang.Integer">
-      <column name="pel_codigo"/>
-      <generator class="increment"/>
-    </id>
-    <property name="nombre" type="string">
-      <column length="50" name="pel_nombre" not-null="true"/>
-    </property>
-    <property name="descripcion" type="string">
-      <column length="100" name="pel_descripcion" not-null="true"/>
-    </property>
-    <property name="estado" type="boolean">
-      <column name="pel_estado" not-null="true"/>
-    </property>
-  </class>
+    <class catalog="cine" name="aplicacion.modelo.dominio.Pelicula" optimistic-lock="version" table="peliculas">
+        <id name="codigo" type="java.lang.Integer">
+            <column name="pel_codigo"/>
+            <generator class="increment"/>
+        </id>
+        <property name="nombre" type="string">
+            <column length="50" name="pel_nombre" not-null="true"/>
+        </property>
+        <property name="descripcion" type="string">
+            <column length="100" name="pel_descripcion" not-null="true"/>
+        </property>
+        <property name="estado" type="boolean">
+            <column name="pel_estado" not-null="true"/>
+        </property>
+    </class>
 </hibernate-mapping>

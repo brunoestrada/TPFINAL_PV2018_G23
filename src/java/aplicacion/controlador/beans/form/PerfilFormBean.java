@@ -1,14 +1,12 @@
 package aplicacion.controlador.beans.form;
 
 import aplicacion.controlador.beans.PerfilBean;
-import aplicacion.controlador.beans.UsuarioBean;
 import aplicacion.hibernate.dao.IPerfilDAO;
-import aplicacion.hibernate.dao.IUsuarioDAO;
 import aplicacion.hibernate.dao.imp.PerfilDAOImp;
-import aplicacion.hibernate.dao.imp.UsuarioDAOImp;
 import aplicacion.modelo.dominio.Perfil;
 import aplicacion.modelo.dominio.Usuario;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -24,23 +22,16 @@ public class PerfilFormBean implements Serializable {
 
     @ManagedProperty(value = "#{perfilBean}")
     private PerfilBean perfilBean;
-    private UsuarioBean usuarioBean;
 
     public PerfilFormBean() {
         perfilBean = new PerfilBean();
-        usuarioBean = new UsuarioBean();
     }
 
     public void agregarPerfil(Perfil perfil) {
         try {
-            usuarioBean.getUsuario().setCodigo(0);
-            usuarioBean.getUsuario().setEstado(true);
-            usuarioBean.getUsuario().setTipoUsuario("FINAL");
-            IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
-            usuarioDAO.agregar(usuarioBean.getUsuario());
-            perfilBean.getPerfil().setCodigo(0);
+            perfilBean.getPerfil().getUsuario().setTipoUsuario("FINAL");
+            perfilBean.getPerfil().getUsuario().setEstado(true);
             perfilBean.getPerfil().setEstado(true);
-            perfilBean.getPerfil().setUsuario(usuarioBean.getUsuario());
             IPerfilDAO perfilDAO = new PerfilDAOImp();
             perfilDAO.agregar(perfilBean.getPerfil());
             FacesMessage facesmessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Agregado", "Usuario Agregado");
@@ -54,14 +45,9 @@ public class PerfilFormBean implements Serializable {
 
     public void agregarPerfilInicial(Perfil perfil) {
         try {
-            usuarioBean.getUsuario().setCodigo(0);
-            usuarioBean.getUsuario().setEstado(true);
-            usuarioBean.getUsuario().setTipoUsuario("FINAL");
-            IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
-            usuarioDAO.agregar(usuarioBean.getUsuario());
-            perfilBean.getPerfil().setCodigo(0);
+            perfilBean.getPerfil().getUsuario().setTipoUsuario("FINAL");
+            perfilBean.getPerfil().getUsuario().setEstado(true);
             perfilBean.getPerfil().setEstado(true);
-            perfilBean.getPerfil().setUsuario(usuarioBean.getUsuario());
             IPerfilDAO perfilDAO = new PerfilDAOImp();
             perfilDAO.agregar(perfilBean.getPerfil());
             FacesMessage facesmessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta creada con exito!", "Cuenta creada con exito!");
@@ -75,9 +61,7 @@ public class PerfilFormBean implements Serializable {
 
     public void editarPerfil(Perfil perfil) {
         try {
-            IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
             IPerfilDAO perfilDAO = new PerfilDAOImp();
-            usuarioDAO.editar(usuarioBean.getUsuario());
             perfilDAO.editar(perfilBean.getPerfil());
             FacesMessage facesmessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Perfil Editado", "Perfil Editado");
             FacesContext.getCurrentInstance().addMessage(null, facesmessage);
@@ -90,12 +74,10 @@ public class PerfilFormBean implements Serializable {
 
     public void eliminarPerfil(Perfil perfil) {
         try {
-            IUsuarioDAO usuarioDAO = new UsuarioDAOImp();
             IPerfilDAO perfilDAO = new PerfilDAOImp();
+            perfilBean.getPerfil().getUsuario().setEstado(false);
             perfilBean.getPerfil().setEstado(false);
             perfilDAO.eliminar(perfilBean.getPerfil());
-            usuarioBean.getUsuario().setEstado(false);
-            usuarioDAO.eliminar(usuarioBean.getUsuario());
             FacesMessage facesmessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Perfil Eliminado", "Perfil Eliminado");
             FacesContext.getCurrentInstance().addMessage(null, facesmessage);
             RequestContext.getCurrentInstance().execute("PF('eliminarPerfilUsuario').hide()");
@@ -104,28 +86,32 @@ public class PerfilFormBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, facesmessage);
         }
     }
-
+    
+    public List<Perfil> obtenerPerfil(){
+        List<Perfil> listaFiltrada = new ArrayList<>();
+        List<Perfil> lista = new ArrayList<>();
+        Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioValidado");
+        IPerfilDAO perfilDAO = new PerfilDAOImp();
+        lista = perfilDAO.obtenerPerfiles();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getUsuario().getNombreUsuario().equals(usuario.getNombreUsuario())) {
+                listaFiltrada.add(lista.get(i));
+            }
+        }
+        return listaFiltrada;
+    }
+    
     public List<Perfil> cargarTabla() {
         IPerfilDAO perfilDAO = new PerfilDAOImp();
         return perfilDAO.obtenerPerfiles();
     }
 
-    public void establecerPerfil(Perfil perfil, Usuario usuario) {
-        usuarioBean.setUsuario(usuario);
+    public void establecerPerfil(Perfil perfil) {
         perfilBean.setPerfil(perfil);
     }
 
     public void limpiarCampos() {
-        usuarioBean.setUsuario(new Usuario());
-        usuarioBean.getUsuario().setNombreUsuario("");
-        usuarioBean.getUsuario().setPassword("");
         perfilBean.setPerfil(new Perfil());
-        perfilBean.getPerfil().setApellido("");
-        perfilBean.getPerfil().setNombre("");
-        perfilBean.getPerfil().setDni("");
-        perfilBean.getPerfil().setDireccion("");
-        perfilBean.getPerfil().setEmail("");
-        perfilBean.getPerfil().setFechaNac(null);
     }
 
     public Date getFechaActual() {
@@ -138,14 +124,6 @@ public class PerfilFormBean implements Serializable {
 
     public void setPerfilBean(PerfilBean perfilBean) {
         this.perfilBean = perfilBean;
-    }
-
-    public UsuarioBean getUsuarioBean() {
-        return usuarioBean;
-    }
-
-    public void setUsuarioBean(UsuarioBean usuarioBean) {
-        this.usuarioBean = usuarioBean;
     }
 
 }

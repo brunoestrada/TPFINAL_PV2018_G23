@@ -2,126 +2,168 @@ package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class Cartelera implements Serializable {
 
-    private Integer carCodigo;
-    private Pelicula peliculas;
-    private Sala salas;
-    private Date carFecha;
-    private String carHorario;
-    private double carPrecio;
-    private boolean carEstado;
+    private Integer codigo;
+    private Pelicula pelicula;
+    private Sala sala;
+    private Date fecha;
+    private String horario;
+    private double precio;
+    private boolean estado;
 
     public Cartelera() {
     }
 
     public Cartelera(Integer carCodigo, Pelicula peliculas, Sala salas, Date carFecha, String carHorario, double carPrecio, boolean carEstado) {
-        this.carCodigo = carCodigo;
-        this.peliculas = peliculas;
-        this.salas = salas;
-        this.carFecha = carFecha;
-        this.carHorario = carHorario;
-        this.carPrecio = carPrecio;
-        this.carEstado = carEstado;
+        this.codigo = carCodigo;
+        this.pelicula = peliculas;
+        this.sala = salas;
+        this.fecha = carFecha;
+        this.horario = carHorario;
+        this.precio = carPrecio;
+        this.estado = carEstado;
     }
 
     /**
-     * @return the carCodigo
+     * @return the codigo
      */
-    public Integer getCarCodigo() {
-        return carCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param carCodigo the carCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setCarCodigo(Integer carCodigo) {
-        this.carCodigo = carCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the peliculas
+     * @return the pelicula
      */
-    public Pelicula getPeliculas() {
-        return peliculas;
+    public Pelicula getPelicula() {
+        return pelicula;
     }
 
     /**
-     * @param peliculas the peliculas to set
+     * @param pelicula the pelicula to set
      */
-    public void setPeliculas(Pelicula peliculas) {
-        this.peliculas = peliculas;
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
 
     /**
-     * @return the salas
+     * @return the sala
      */
-    public Sala getSalas() {
-        return salas;
+    public Sala getSala() {
+        return sala;
     }
 
     /**
-     * @param salas the salas to set
+     * @param sala the sala to set
      */
-    public void setSalas(Sala salas) {
-        this.salas = salas;
+    public void setSala(Sala sala) {
+        this.sala = sala;
     }
 
     /**
-     * @return the carFecha
+     * @return the fecha
      */
-    public Date getCarFecha() {
-        return carFecha;
+    public Date getFecha() {
+        return fecha;
     }
 
     /**
-     * @param carFecha the carFecha to set
+     * @param fecha the fecha to set
      */
-    public void setCarFecha(Date carFecha) {
-        this.carFecha = carFecha;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     /**
-     * @return the carHorario
+     * @return the horario
      */
-    public String getCarHorario() {
-        return carHorario;
+    public String getHorario() {
+        return horario;
     }
 
     /**
-     * @param carHorario the carHorario to set
+     * @param horario the horario to set
      */
-    public void setCarHorario(String carHorario) {
-        this.carHorario = carHorario;
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 
     /**
-     * @return the carPrecio
+     * @return the precio
      */
-    public double getCarPrecio() {
-        return carPrecio;
+    public double getPrecio() {
+        return precio;
     }
 
     /**
-     * @param carPrecio the carPrecio to set
+     * @param precio the precio to set
      */
-    public void setCarPrecio(double carPrecio) {
-        this.carPrecio = carPrecio;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     /**
-     * @return the carEstado
+     * @return the estado
      */
-    public boolean isCarEstado() {
-        return carEstado;
+    public boolean isEstado() {
+        return estado;
     }
 
     /**
-     * @param carEstado the carEstado to set
+     * @param estado the estado to set
      */
-    public void setCarEstado(boolean carEstado) {
-        this.carEstado = carEstado;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.codigo;
+        hash = 61 * hash + Objects.hashCode(this.pelicula);
+        hash = 61 * hash + Objects.hashCode(this.sala);
+        hash = 61 * hash + Objects.hashCode(this.fecha);
+        hash = 61 * hash + Objects.hashCode(this.horario);
+        hash = 61 * hash + Objects.hashCode(this.precio);
+        return hash;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cartelera other = (Cartelera) obj;
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.pelicula, other.pelicula)) {
+            return false;
+        }
+        if (!Objects.equals(this.sala, other.sala)) {
+            return false;
+        }
+        if (!Objects.equals(this.fecha, other.fecha)) {
+            return false;
+        }
+        if (!Objects.equals(this.horario, other.horario)) {
+            return false;
+        }
+        if (!Objects.equals(this.precio, other.precio)) {
+            return false;
+        }
+        return true;
+    }
 }

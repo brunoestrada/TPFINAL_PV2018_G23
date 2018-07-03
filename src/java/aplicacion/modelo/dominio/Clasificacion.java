@@ -1,6 +1,7 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Clasificacion implements Serializable {
 
@@ -58,5 +59,31 @@ public class Clasificacion implements Serializable {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.codigo;
+        hash = 61 * hash + Objects.hashCode(this.descripcion);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Clasificacion other = (Clasificacion) obj;
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

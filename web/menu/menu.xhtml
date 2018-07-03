@@ -3,37 +3,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Sistema de Cine</title>
     </h:head>
     <body>
-        <f:view locale="en">
-            <ui:composition template="./../templates/template.xhtml">
-                <ui:define name="content">
-                    <div id="tooplate_main">
-                        <br/>
-                        <p:outputLabel id="txtInicio" value="#{msg['menu.inicio']}" rendered="#{usuarioControlFormBean.verificarSesion()}"/>
-                        <br/>
-                        <p:outputLabel id="txtParrafo" rendered="#{usuarioControlFormBean.verificarSesion()}" value="#{msg['menu.parrafo']}"/>
-                        <br/><br/>
-                        <p:panel id="pnlSlider" rendered="#{usuarioControlFormBean.verificarSesion()}">
-                            <div id="sliderFrame">
-                                <div id="slider" >
-                                    <h:graphicImage value="/resources/slider/img/image-slider-1.jpg" alt="#{msg['menu.slider1']}"/>
-                                    <h:graphicImage value="/resources/slider/img/image-slider-2.jpg" alt="#{msg['menu.slider2']}"/>
-                                    <h:graphicImage value="/resources/slider/img/image-slider-3.jpg" alt="#{msg['menu.slider3']}"/>
-                                    <h:graphicImage value="/resources/slider/img/image-slider-4.jpg" alt="#{msg['menu.slider4']}"/>
-                                    <h:graphicImage value="/resources/slider/img/image-slider-5.jpg" alt="#{msg['menu.slider5']}"/>
-                                </div>
+        <ui:composition template="./../templates/template.xhtml">
+            <ui:define name="content">
+                <div id="tooplate_main">
+                    <br/>
+                    <p:outputLabel id="txtInicio" value="Inicio" rendered="#{usuarioControlFormBean.verificarSesion()}"/>
+                    <br/>
+                    <p:outputLabel id="txtParrafo" rendered="#{usuarioControlFormBean.verificarSesion()}" value="El cine unju fue creado el 01 de Enero de 2018, bajo la aprobación del rectorado de la UNJu y de todas las facultades.
+                                   Es un gran orgullo para toda nuestra universidad poder contar con un cine propio de esta categoria, ya que en él se podrán
+                                   realizar muchos eventos importantes sin la necesidad de depender de terceros."/>
+                    <br/><br/>
+                    <p:panel id="pnlSlider" rendered="#{usuarioControlFormBean.verificarSesion()}">
+                        <div id="sliderFrame">
+                            <div id="slider" >
+                                <h:graphicImage value="/resources/slider/img/image-slider-1.jpg" alt="Bienvenido al Cine UNJu."/>
+                                <h:graphicImage value="/resources/slider/img/image-slider-2.jpg" alt="Funciones todos los dias de la semana."/>
+                                <h:graphicImage value="/resources/slider/img/image-slider-3.jpg" alt="¡Precio rebajado dias Miercoles y Viernes!"/>
+                                <h:graphicImage value="/resources/slider/img/image-slider-4.jpg" alt="¡Prociones 2x1 más palomitas en funciones seleccionadas!"/>
+                                <h:graphicImage value="/resources/slider/img/image-slider-5.jpg" alt="Salas de primer nivel."/>
                             </div>
-                        </p:panel>
-                    </div>
-                </ui:define>
-            </ui:composition>
-        </f:view>
+                        </div>
+                    </p:panel>
+                </div>
+            </ui:define>
+        </ui:composition>
     </body>
 </html>

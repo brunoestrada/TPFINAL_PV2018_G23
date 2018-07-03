@@ -1,6 +1,7 @@
 package aplicacion.modelo.dominio;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Perfil implements java.io.Serializable {
 
@@ -87,6 +88,36 @@ public class Perfil implements java.io.Serializable {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.codigo;
+        hash = 61 * hash + Objects.hashCode(this.nombre);
+        hash = 61 * hash + Objects.hashCode(this.apellido);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Perfil other = (Perfil) obj;
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellido, other.apellido)) {
+            return false;
+        }
+        return true;
     }
 
 }

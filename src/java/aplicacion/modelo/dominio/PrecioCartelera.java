@@ -4,75 +4,75 @@ import java.io.Serializable;
 
 public class PrecioCartelera implements Serializable {
 
-    private Integer preCodigo;
-    private Cartelera carteleras;
-    private String preDescripcion;
-    private double prePrecio;
+    private Integer codigo;
+    private Cartelera cartelera;
+    private String descripcion;
+    private double precio;
 
     public PrecioCartelera() {
     }
 
     public PrecioCartelera(Integer preCodigo, Cartelera carteleras, String preDescripcion, double prePrecio) {
-        this.preCodigo = preCodigo;
-        this.carteleras = carteleras;
-        this.preDescripcion = preDescripcion;
-        this.prePrecio = prePrecio;
+        this.codigo = preCodigo;
+        this.cartelera = carteleras;
+        this.descripcion = preDescripcion;
+        this.precio = prePrecio;
     }
 
     /**
-     * @return the preCodigo
+     * @return the codigo
      */
-    public Integer getPreCodigo() {
-        return preCodigo;
+    public Integer getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param preCodigo the preCodigo to set
+     * @param codigo the codigo to set
      */
-    public void setPreCodigo(Integer preCodigo) {
-        this.preCodigo = preCodigo;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     /**
-     * @return the carteleras
+     * @return the cartelera
      */
-    public Cartelera getCarteleras() {
-        return carteleras;
+    public Cartelera getCartelera() {
+        return cartelera;
     }
 
     /**
-     * @param carteleras the carteleras to set
+     * @param cartelera the cartelera to set
      */
-    public void setCarteleras(Cartelera carteleras) {
-        this.carteleras = carteleras;
+    public void setCartelera(Cartelera cartelera) {
+        this.cartelera = cartelera;
     }
 
     /**
-     * @return the preDescripcion
+     * @return the descripcion
      */
-    public String getPreDescripcion() {
-        return preDescripcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
-     * @param preDescripcion the preDescripcion to set
+     * @param descripcion the descripcion to set
      */
-    public void setPreDescripcion(String preDescripcion) {
-        this.preDescripcion = preDescripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     /**
-     * @return the prePrecio
+     * @return the precio
      */
-    public double getPrePrecio() {
-        return prePrecio;
+    public double getPrecio() {
+        return precio;
     }
 
     /**
-     * @param prePrecio the prePrecio to set
+     * @param precio the precio to set
      */
-    public void setPrePrecio(double prePrecio) {
-        this.prePrecio = prePrecio;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
 }
