@@ -11,19 +11,17 @@ public class Cartelera implements Serializable {
     private Sala sala;
     private Date fecha;
     private String horario;
-    private double precio;
     private boolean estado;
 
     public Cartelera() {
     }
 
-    public Cartelera(Integer carCodigo, Pelicula peliculas, Sala salas, Date carFecha, String carHorario, double carPrecio, boolean carEstado) {
+    public Cartelera(Integer carCodigo, Pelicula peliculas, Sala salas, Date carFecha, String carHorario, boolean carEstado) {
         this.codigo = carCodigo;
         this.pelicula = peliculas;
         this.sala = salas;
         this.fecha = carFecha;
         this.horario = carHorario;
-        this.precio = carPrecio;
         this.estado = carEstado;
     }
 
@@ -98,20 +96,6 @@ public class Cartelera implements Serializable {
     }
 
     /**
-     * @return the precio
-     */
-    public double getPrecio() {
-        return precio;
-    }
-
-    /**
-     * @param precio the precio to set
-     */
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    /**
      * @return the estado
      */
     public boolean isEstado() {
@@ -133,7 +117,6 @@ public class Cartelera implements Serializable {
         hash = 61 * hash + Objects.hashCode(this.sala);
         hash = 61 * hash + Objects.hashCode(this.fecha);
         hash = 61 * hash + Objects.hashCode(this.horario);
-        hash = 61 * hash + Objects.hashCode(this.precio);
         return hash;
     }
 
@@ -159,9 +142,6 @@ public class Cartelera implements Serializable {
             return false;
         }
         if (!Objects.equals(this.horario, other.horario)) {
-            return false;
-        }
-        if (!Objects.equals(this.precio, other.precio)) {
             return false;
         }
         return true;

@@ -1,7 +1,9 @@
 package aplicacion.controlador.beans.form;
 
 import aplicacion.controlador.beans.PerfilBean;
+import aplicacion.hibernate.dao.ILoginDAO;
 import aplicacion.hibernate.dao.IPerfilDAO;
+import aplicacion.hibernate.dao.imp.LoginDAOImp;
 import aplicacion.hibernate.dao.imp.PerfilDAOImp;
 import aplicacion.modelo.dominio.Perfil;
 import aplicacion.modelo.dominio.Usuario;
@@ -29,9 +31,12 @@ public class PerfilFormBean implements Serializable {
 
     public void agregarPerfil(Perfil perfil) {
         try {
+            perfilBean.getPerfil().getUsuario().setCodigo(0);
             perfilBean.getPerfil().getUsuario().setTipoUsuario("FINAL");
             perfilBean.getPerfil().getUsuario().setEstado(true);
             perfilBean.getPerfil().setEstado(true);
+            ILoginDAO loginDAO = new LoginDAOImp();
+            loginDAO.agregarUsuario(perfilBean.getPerfil().getUsuario());
             IPerfilDAO perfilDAO = new PerfilDAOImp();
             perfilDAO.agregar(perfilBean.getPerfil());
             FacesMessage facesmessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Agregado", "Usuario Agregado");
@@ -45,9 +50,12 @@ public class PerfilFormBean implements Serializable {
 
     public void agregarPerfilInicial(Perfil perfil) {
         try {
+            perfilBean.getPerfil().getUsuario().setCodigo(0);
             perfilBean.getPerfil().getUsuario().setTipoUsuario("FINAL");
             perfilBean.getPerfil().getUsuario().setEstado(true);
             perfilBean.getPerfil().setEstado(true);
+            ILoginDAO loginDAO = new LoginDAOImp();
+            loginDAO.agregarUsuario(perfilBean.getPerfil().getUsuario());
             IPerfilDAO perfilDAO = new PerfilDAOImp();
             perfilDAO.agregar(perfilBean.getPerfil());
             FacesMessage facesmessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta creada con exito!", "Cuenta creada con exito!");

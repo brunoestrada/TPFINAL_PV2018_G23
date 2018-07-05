@@ -5,9 +5,9 @@
   <class catalog="cine" name="aplicacion.modelo.dominio.PrecioCartelera" optimistic-lock="version" table="precios_carteleras">
     <id name="codigo" type="java.lang.Integer">
       <column name="pre_codigo"/>
-      <generator class="identity"/>
+      <generator class="increment"/>
     </id>
-    <many-to-one class="aplicacion.modelo.dominio.Cartelera" fetch="join" name="cartelera">
+    <many-to-one class="aplicacion.modelo.dominio.Cartelera" fetch="join" name="cartelera" cascade="all">
       <column name="pre_cartelera" not-null="true"/>
     </many-to-one>
     <property name="descripcion" type="string">

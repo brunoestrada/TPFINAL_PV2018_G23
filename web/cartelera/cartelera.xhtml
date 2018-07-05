@@ -3,42 +3,125 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
-
         <ui:composition template="./../templates/template.xhtml">
-
             <ui:define name="content">
                 <div id="tooplate_main">
-                    <h:form id="frmCartelera" rendered="#{usuarioControlFormBean.verificarSesion()}">
-                        <p:panel header="Cartelera" footer="Sistema de Cine - 2018">
-                            <p:dataTable id="tblCartelera" paginator="true" rows="6" value="#{carteleraFormBean.cargarCarteleras()}" var="cart">
-                                <p:column headerText="Fecha" style="text-align: center">
-                                    <p:outputLabel value="#{cart.fecha}">
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </p:outputLabel>
-                                </p:column>
+                    <div>
+                        <p:panelGrid style="border: transparent" rendered="#{usuarioControlFormBean.verificarSesion()}">
+                            <p:column style="width: 340px">
+                                <p:panel id="salas" header="Salas" toggleable="true">
+                                    <h:form id="frmSala">
+                                        <h:panelGrid columns="3" cellpadding="4">
+                                            <p:commandButton value="Sala 1" actionListener="#{carteleraFormBean.filtroSala1()}"
+                                                             update=":ListaCartelera"/>
+                                            <p:commandButton value="Sala 2" actionListener="#{carteleraFormBean.filtroSala2()}"
+                                                             update=":ListaCartelera"/>
+                                            <p:commandButton value="Sala 3" actionListener="#{carteleraFormBean.filtroSala3()}"
+                                                             update=":ListaCartelera"/>
+                                        </h:panelGrid>
+                                    </h:form>
+                                </p:panel>
+                                <p:panel id="horario" header="Horario" toggleable="true">
+                                    <h:panelGrid columns="1" cellpadding="1">
 
-                                <p:column headerText="Horario" style="text-align: center">
-                                    <p:outputLabel value="#{cart.horario}"/>   
-                                </p:column>
+                                        <h:form id="frmHorario">
+                                            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                                                <h:outputText id="displayRange" value="Deste 0hs hasta 24hs" />
+                                                <p:slider for="txt6,txt7" display="displayRange" style="width: 250px" range="true" 
+                                                          displayTemplate="Desde {min}hs hasta {max}hs" minValue="0" maxValue="24">
+                                                </p:slider>
+                                            </h:panelGrid>
+                                            <h:inputHidden id="txt6" value="#{carteleraFormBean.horario1}" />
+                                            <h:inputHidden id="txt7" value="#{carteleraFormBean.horario2}" />
+                                            <p:commandButton  value="Buscar Horario" actionListener="#{carteleraFormBean.filtroHorario()}" 
+                                                              update=":ListaCartelera" />  
+                                        </h:form>
+                                    </h:panelGrid>
+                                </p:panel>
+                                <p:panel id="Dia" header="Dia" toggleable="true">
+                                    <h:form id="frmDia">
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <p:calendar value="#{carteleraFormBean.filtroFecha}"  pattern="yyyy/mm/dd" >
+                                                <p:ajax  event="dateSelect" listener="#{carteleraFormBean.filtroporFecha()}"
+                                                         update=":ListaCartelera,:frmDia"/>
+                                            </p:calendar>
+                                            <p:outputLabel value="#{carteleraFormBean.fechita}"/>
+                                            <p:outputLabel value="#{carteleraFormBean.fechita2}"/>
+                                        </h:panelGrid>
+                                    </h:form>
+                                </p:panel>
+                                <p:panel id="limpiar"  toggleable="true">
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <p:commandButton value="Limpiar Busqueda" actionListener="#{carteleraFormBean.llenarCartelera()}"
+                                                         update=":ListaCartelera"/>
+                                    </h:panelGrid>
+                                </p:panel>
+                            </p:column>
+                            <p:column>
+                                <h:form id="ListaCartelera">
+                                    <p:panel header="Cartelera" footer="Sistema de Cine - 2018" style="width:700px;">
+                                        <p:dataTable id="listCartelera" value="#{carteleraFormBean.carteleras}" var="c">
+                                            <p:column headerText="Fecha">
+                                                <p:outputLabel value="#{c.fecha}"/>   
+                                            </p:column>
 
-                                <p:column headerText="Pelicula" style="text-align: center">
-                                    <p:outputLabel value="#{cart.pelicula.nombre}"/>   
-                                </p:column>
+                                            <p:column headerText="Horario">
+                                                <p:outputLabel value="#{c.horario}"/>   
+                                            </p:column>
 
-                                <p:column headerText="Precio" style="text-align: center">
-                                    <p:outputLabel value="$#{cart.precio}"/>   
-                                </p:column>
+                                            <p:column headerText="Pelicula">
+                                                <p:outputLabel value="#{c.pelicula.nombre}"/>   
+                                            </p:column>
 
-                                <p:column headerText="Sala" style="text-align: center">
-                                    <p:outputLabel value="#{cart.sala.nombre}"/>   
-                                </p:column>
-                            </p:dataTable>
-                        </p:panel>
-                    </h:form>
+                                            <p:column headerText="Sala">
+                                                <p:outputLabel value="#{c.sala.nombre}"/>   
+                                            </p:column>
+
+                                            <p:column>
+                                                <p:commandButton icon="ui-icon-search"
+                                                                 oncomplete="PF('detalle').show()"
+                                                                 actionListener="#{carteleraFormBean.asignarCartelera(c)}"
+                                                                 update=":detPelicula"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </p:panel>
+                                    <br/>
+                                    <p:commandButton value="Exportar" ajax="false" actionListener="#{carteleraFormBean.exportarPeliculaPdf(actionEvent)}"/>
+                                </h:form>
+                            </p:column>
+
+                        </p:panelGrid>
+
+                        <p:dialog widgetVar="detalle" modal="true" resizable="false">
+                            <h:form id="detPelicula">
+                                <p:panelGrid columns="2">
+                                    <p:column>
+                                        <p:outputLabel value="Aca va la imagen"/>
+                                    </p:column> 
+
+                                    <p:column>
+                                        <p:panelGrid columns="2">
+                                            <p:outputLabel value="Horario"/>
+                                            <p:outputLabel value="#{carteleraFormBean.carteleraBean.cartelera.horario}"/>
+
+                                            <p:outputLabel value="Nombre:"/>
+                                            <p:outputLabel value="#{carteleraFormBean.carteleraBean.cartelera.pelicula.nombre}"/>
+
+                                            <p:outputLabel value="Descripcion:"/>
+                                            <p:outputLabel value="#{carteleraFormBean.carteleraBean.cartelera.pelicula.descripcion}"/>
+
+                                            <p:outputLabel value="Sala:"/>
+                                            <p:outputLabel value="#{carteleraFormBean.carteleraBean.cartelera.sala.nombre}"/>
+
+                                        </p:panelGrid>
+                                    </p:column>
+                                </p:panelGrid>
+                            </h:form>
+                        </p:dialog>
+                    </div>
                 </div>
             </ui:define>
         </ui:composition>

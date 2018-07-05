@@ -1,17 +1,93 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
-
         <ui:composition template="./../templates/template.xhtml">
-
             <ui:define name="content">
-                content
+                <div id="tooplate_main">
+                    <h:form id="frmSalas" rendered="#{usuarioControlFormBean.verificarSesion()}">
+                        <p:panel header="Salas">
+                            <p:dataTable id="tblSalas" paginator="true" paginatorPosition="bottom" rows="6"
+                                         value="#{salaFormBean.cargarSalas()}" var="sal">
+                                <p:column headerText="Nombre" style="text-align: center">
+                                    <p:outputLabel value="#{sal.nombre}"/>   
+                                </p:column>
+
+                                <p:column headerText="Descripcion" style="text-align: center">
+                                    <p:outputLabel value="#{sal.descripcion}"/>   
+                                </p:column>
+
+                                <p:column headerText="Acciones" style="text-align: center">
+                                    <p:commandButton id="btnEditarSala" icon="ui-icon-pencil" oncomplete="PF('editarSala').show()"
+                                                     actionListener="#{salaFormBean.establecerSala(sal)}" update="frmEditarSala"/>
+                                    <p:commandButton id="btnEliminarSala" icon="ui-icon-trash" oncomplete="PF('eliminarSala').show()"
+                                                     actionListener="#{salaFormBean.establecerSala(sal)}" update="frmEliminarSala"/>
+                                </p:column>
+                            </p:dataTable>
+                            <br/>
+                            <p:commandButton id="btnAgregarSala" value="Crear Sala" oncomplete="PF('cargarSala').show()"
+                                             actionListener="#{salaFormBean.limpiarCampos()}" update="frmCargaSala" />
+                        </p:panel>
+                    </h:form>
+                    <h:form id="frmCargaSala">
+                        <p:growl id="grlCargaSala" showDetail="false" sticky="false"/>
+                        <p:dialog header="Alta de Sala" widgetVar="cargarSala" modal="true" closable="true" resizable="false"
+                                  showEffect="explode" hideEffect="explode">
+                            <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid" >
+                                <p:outputLabel for="txtNombre" value="Nombre: "/>
+                                <p:inputText id="txtNombre" value="#{salaFormBean.salaBean.sala.nombre}"
+                                             required="true" requiredMessage="Complete nombre de Sala"/>
+
+                                <p:outputLabel for="txtDescripcion" value="Descripcion: "/>
+                                <p:inputText id="txtDescripcion" value="#{salaFormBean.salaBean.sala.descripcion}"
+                                             required="true" requiredMessage="Complete descripcion de Sala"/>
+
+                                <p:commandButton id="btnGuardarSala" value="Aceptar" actionListener="#{salaFormBean.agregar(salaFormBean.salaBean.sala)}"
+                                                 update="grlCargaSala, :frmSalas:tblSalas"/>
+                                <p:commandButton id="btnCancelGuardarSala" value="Cancelar" oncomplete="PF('cargarSala').hide()"/>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                    <h:form id="frmEditarSala">
+                        <p:growl id="grlEditarSala" showDetail="false" sticky="false"/>
+                        <p:dialog header="Editar Sala" widgetVar="editarSala" modal="true" closable="true" resizable="false"
+                                  showEffect="explode" hideEffect="explode">
+                            <h:panelGrid columns="2" cellpadding="5" styleClass="panelGrid" >
+                                <p:outputLabel for="txtNombre" value="Nombre: "/>
+                                <p:inputText id="txtNombre" value="#{salaFormBean.salaBean.sala.nombre}"
+                                             required="true" requiredMessage="Complete nombre de Sala"/>
+
+                                <p:outputLabel for="txtDescripcion" value="Descripcion: "/>
+                                <p:inputText id="txtDescripcion" value="#{salaFormBean.salaBean.sala.descripcion}"
+                                             required="true" requiredMessage="Complete descripcion de Sala"/>
+
+                                <p:commandButton id="btnEditarSala" value="Aceptar" actionListener="#{salaFormBean.editar(salaFormBean.salaBean.sala)}"
+                                                 update="grlEditarSala, :frmSalas:tblSalas"/>
+                                <p:commandButton id="btnCancelEditarSala" value="Cancelar" oncomplete="PF('editarSala').hide()"/>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                    <h:form id="frmEliminarSala">
+                        <p:growl id="grlEliminarSala" showDetail="false" sticky="false"/>
+                        <p:confirmDialog widgetVar="eliminarSala" header="Eliminar Sala"
+                                         message="¿Desea eliminar este item?" showEffect="explode" hideEffect="explode">
+                            <h:panelGrid columns="3" cellpadding="5" style="text-align: center">
+                                <p:outputLabel value="Nombre: "/>
+                                <p:outputLabel value="#{salaFormBean.salaBean.sala.nombre}"/>
+                                <h:panelGroup/>
+                                <h:panelGroup/>
+                                <p:commandButton value="SI" actionListener="#{salaFormBean.eliminar(salaFormBean.salaBean.sala)}"
+                                                 update="grlEliminarSala, :frmSalas:tblSalas"/>
+                                <p:commandButton value="NO" oncomplete="PF('eliminarSala').hide()"/>
+                            </h:panelGrid>
+                        </p:confirmDialog>
+                    </h:form>
+                </div>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

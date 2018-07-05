@@ -13,8 +13,8 @@
             <ui:define name="content">
                 <div id="tooplate_main">
                     <h:form id="frmDirector" rendered="#{usuarioControlFormBean.verificarSesion()}">
-                        <p:panel header="Director" footer="Sistema de Cine - 2018">
-                            <p:dataTable id="tblDirector" paginator="true" rows="6" value="#{peliDirectorFormBean.cargarDirectores()}" var="dire">
+                        <p:panel header="Directores" footer="Sistema de Cine - 2018">
+                            <p:dataTable id="tblDirector" paginator="true" paginatorPosition="bottom" rows="6" value="#{peliDirectorFormBean.cargarDirectores()}" var="dire">
                                 <p:column headerText="Pelicula" style="text-align: center">
                                     <p:outputLabel value="#{dire.pelicula.nombre}"/>   
                                 </p:column>

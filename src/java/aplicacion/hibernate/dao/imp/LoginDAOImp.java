@@ -22,5 +22,13 @@ public class LoginDAOImp implements ILoginDAO {
         }
         return usuario;
     }
-
+    
+    @Override
+    public void agregarUsuario(Usuario usuario){
+        Session session = HibernateUtil.getSESSION_FACTORY().openSession();
+        session.beginTransaction();
+        session.save(usuario);
+        session.getTransaction().commit();
+        session.close();
+    }
 }

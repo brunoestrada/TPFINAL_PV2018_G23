@@ -7,14 +7,14 @@ public class VentaEntradas implements Serializable {
     private Integer codigo;
     private ButacaCartelera butacaCartelera;
     private Perfil perfil;
-    private String precio;
+    private double precio;
     private String descripcion;
     private boolean estado;
 
     public VentaEntradas() {
     }
 
-    public VentaEntradas(Integer venCodigo, ButacaCartelera butacasCarteleras, Perfil perfiles, String venPrecio, String venDescripcion, boolean venEstado) {
+    public VentaEntradas(Integer venCodigo, ButacaCartelera butacasCarteleras, Perfil perfiles, double venPrecio, String venDescripcion, boolean venEstado) {
         this.codigo = venCodigo;
         this.butacaCartelera = butacasCarteleras;
         this.perfil = perfiles;
@@ -68,14 +68,14 @@ public class VentaEntradas implements Serializable {
     /**
      * @return the precio
      */
-    public String getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
     /**
      * @param precio the precio to set
      */
-    public void setPrecio(String precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 

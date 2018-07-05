@@ -12,13 +12,13 @@
             <ui:define name="content">
                 <div id="tooplate_main">
                     <h:form id="frmClasificacion" rendered="#{usuarioControlFormBean.verificarSesion()}">
-                        <p:panel header="Clasificación" footer="Sistema de Cine - 2018">
-                            <p:dataTable id="tblClasificacion" paginator="true" rows="6" value="#{clasificacionFormBean.cargarClasificaciones()}" var="cla">
-                                <p:column headerText="Codigo">
+                        <p:panel header="Clasificaciónes" footer="Sistema de Cine - 2018">
+                            <p:dataTable id="tblClasificacion" paginator="true" paginatorPosition="bottom" rows="6" value="#{clasificacionFormBean.cargarClasificaciones()}" var="cla">
+                                <p:column headerText="Codigo" style="text-align: center">
                                     <p:outputLabel value="#{cla.codigo}"/>   
                                 </p:column>
 
-                                <p:column headerText="Clasificación">
+                                <p:column headerText="Clasificación" style="text-align: center">
                                     <p:outputLabel value="#{cla.descripcion}"/>   
                                 </p:column>
 

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../templates/template.xhtml">
+            <ui:define name="content">
+                <div id="tooplate_main">
+                    <h:form id="frmVentas" rendered="#{usuarioControlFormBean.verificarSesionUF() eq false}">
+                        <p:panel header="Entradas Vendidas" >
+                            <p:dataTable id="tblVentas" paginator="true" paginatorPosition="bottom" rows="6" value="#{ventaFormBean.cargarVentas()}" var="vent">
+                                <p:column headerText="Vendedor" style="text-align: center" width="17%">
+                                    <p:outputLabel value="#{vent.perfil.nombre}, #{vent.perfil.apellido}"/>   
+                                </p:column>
+                                
+                                <p:column headerText="Fecha" style="text-align: center" width="10%">
+                                    <p:outputLabel value="#{vent.butacaCartelera.cartelera.fecha}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:outputLabel>
+                                </p:column>
+                                
+                                <p:column headerText="Hora" style="text-align: center" width="8%">
+                                    <p:outputLabel value="#{vent.butacaCartelera.cartelera.horario}hs"/>   
+                                </p:column>
+                                
+                                <p:column headerText="Asiento" style="text-align: center" width="8%">
+                                    <p:outputLabel value="#{vent.butacaCartelera.identificadorButaca}"/>   
+                                </p:column>
+                                
+                                <p:column headerText="Pelicula" style="text-align: center">
+                                    <p:outputLabel value="#{vent.butacaCartelera.cartelera.pelicula.nombre}"/>   
+                                </p:column>
+                                
+                                <p:column headerText="Precio" style="text-align: center" width="8%">
+                                    <p:outputLabel value="$#{vent.precio}"/>   
+                                </p:column>
+
+                                <p:column headerText="Sala" style="text-align: center" width="8%">
+                                    <p:outputLabel value="#{vent.butacaCartelera.cartelera.sala.nombre}"/>   
+                                </p:column>
+                                
+                                <p:column headerText="Descripcion" style="text-align: center">
+                                    <p:outputLabel value="#{vent.descripcion}"/>   
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

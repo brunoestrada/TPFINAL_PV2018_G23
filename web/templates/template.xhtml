@@ -27,8 +27,9 @@
                     <div id="tooplate_middle"  >
                         <h:form rendered="#{usuarioControlFormBean.verificarSesion()}">
                             <p:menubar>  
-                                <p:submenu label="Ventas" icon="ui-icon-contact">
-                                    <p:menuitem value="ventas" outcome="/ventas/ventas"/>
+                                <p:submenu label="Ventas" icon="ui-icon-contact" rendered="#{usuarioControlFormBean.verificarSesionUF() eq false}">
+                                    <p:menuitem value="Ventas" outcome="/ventas/ventas"/>
+                                    <p:menuitem value="Control Ventas" outcome="/ventas/controlVentas"/>
                                 </p:submenu>
                                 
                                 <p:submenu label="Cartelera" icon="ui-icon-document">

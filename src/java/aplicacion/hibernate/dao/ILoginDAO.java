@@ -12,5 +12,6 @@ public interface ILoginDAO {
      * @return null si no existe
      */
     Usuario validarUsuario(String nombreUsuario, String password);
-
+    
+    public void agregarUsuario(Usuario usuario);
 }

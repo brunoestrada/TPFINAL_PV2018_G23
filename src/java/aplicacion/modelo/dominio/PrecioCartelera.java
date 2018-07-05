@@ -1,6 +1,7 @@
 package aplicacion.modelo.dominio;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class PrecioCartelera implements Serializable {
 
@@ -73,6 +74,40 @@ public class PrecioCartelera implements Serializable {
      */
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.codigo;
+        hash = 61 * hash + Objects.hashCode(this.descripcion);
+        hash = 61 * hash + Objects.hashCode(this.precio);
+        hash = 61 * hash + Objects.hashCode(this.cartelera);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PrecioCartelera other = (PrecioCartelera) obj;
+        if (!Objects.equals(this.codigo, other.codigo)) {
+            return false;
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        if (!Objects.equals(this.precio, other.precio)) {
+            return false;
+        }
+        if (!Objects.equals(this.cartelera, other.cartelera)) {
+            return false;
+        }
+        return true;
     }
 
 }

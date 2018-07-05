@@ -6,9 +6,9 @@
     <class name="aplicacion.dominio.modelo.Butaca" table="butacas" catalog="cine" optimistic-lock="version">
         <id name="butCodigo" type="java.lang.Integer">
             <column name="but_codigo" />
-            <generator class="identity" />
+            <generator class="increment" />
         </id>
-        <many-to-one name="salas" class="aplicacion.dominio.modelo.Sala" fetch="join">
+        <many-to-one name="salas" class="aplicacion.dominio.modelo.Sala" fetch="join" cascade="all">
             <column name="but_sala" not-null="true" />
         </many-to-one>
         <property name="butIdentificador" type="string">
